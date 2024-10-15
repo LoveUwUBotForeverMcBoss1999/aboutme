@@ -31,6 +31,21 @@
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
+            position: relative;
+        }
+        .lightning-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .lightning {
+            position: absolute;
+            background: #fff;
+            opacity: 0.3;
         }
         .snow-container {
             position: fixed;
@@ -67,7 +82,9 @@
             text-align: center;
             animation: fadeIn 2s ease-in-out;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            border: 3px solid white;
+            box-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff;
         }
         .container img {
             border-radius: 50%;
@@ -146,6 +163,7 @@
     </style>
 </head>
 <body>
+    <div class="lightning-container"></div>
     <div class="snow-container"></div>
     <div class="container">
         <img src="https://uwubot.online/img/mcbosspropic.gif" alt="McBoss Profile Picture">
@@ -180,7 +198,63 @@
             }
         }
 
-        window.addEventListener('load', createSnowflakes);
+        function createLightning() {
+            const lightningContainer = document.querySelector('.lightning-container');
+            const lightning = document.createElement('div');
+            lightning.classList.add('lightning');
+
+            const startX = Math.random() * window.innerWidth;
+            const startY = 0;
+            let x = startX;
+            let y = startY;
+
+            const segments = Math.floor(Math.random() * 5) + 3;
+            const points = [[startX, startY]];
+
+            for (let i = 0; i < segments; i++) {
+                const newX = x + (Math.random() - 0.5) * 100;
+                const newY = y + (window.innerHeight / segments) * (Math.random() * 0.5 + 0.75);
+                points.push([newX, newY]);
+                x = newX;
+                y = newY;
+            }
+
+            points.push([x, window.innerHeight]);
+
+            const pathD = points.map((point, index) => 
+                `${index === 0 ? 'M' : 'L'}${point[0]},${point[1]}`
+            ).join(' ');
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
+            svg.style.position = 'absolute';
+            svg.style.top = '0';
+            svg.style.left = '0';
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', pathD);
+            path.setAttribute('stroke', 'white');
+            path.setAttribute('stroke-width', '2');
+            path.setAttribute('fill', 'none');
+
+            svg.appendChild(path);
+            lightningContainer.appendChild(svg);
+
+            setTimeout(() => {
+                lightningContainer.removeChild(svg);
+            }, 200);
+        }
+
+        function animateLightning() {
+            createLightning();
+            setTimeout(animateLightning, Math.random() * 5000 + 2000);
+        }
+
+        window.addEventListener('load', () => {
+            createSnowflakes();
+            animateLightning();
+        });
     </script>
 </body>
 </html>
