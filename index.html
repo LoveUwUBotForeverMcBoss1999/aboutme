@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McBoss - About Me</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6D83F2, #48D1CC);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid white;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container img:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #F9DC5C;
+            text-shadow: 2px 2px #000;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #E6E6E6;
+        }
+
+        .highlight {
+            color: #F9DC5C;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://uwubot.online/img/mcbosspropic.gif" alt="McBoss Profile Picture">
+        <h1>Miyuru Gunatilake</h1>
+        <p>Known as <span class="highlight">McBoss</span> by everyone.</p>
+        <p>From the beautiful island of <span class="highlight">Sri Lanka</span>.</p>
+        <p>I absolutely love <span class="highlight">coding</span> in Python and creating awesome <span class="highlight">Discord bots</span>.</p>
+        <p>In my free time, I’m also into <span class="highlight">Minecraft</span>.</p>
+        <p>When I'm not coding or gaming, I prefer spending time <span class="highlight">alone</span> – it’s just how I roll.</p>
+        <p>Still going to school, but already building the future!</p>
+    </div>
+</body>
+</html>
