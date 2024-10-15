@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>McBoss - About Me</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="https://uwubot.online/img/uwubot.png" type="image/png">
     <link rel="icon" href="https://uwubot.online/img/mcbosspropic.gif" type="image/gif">
     <!-- Open Graph Meta Tags -->
@@ -28,8 +29,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
+            padding: 20px;
+            overflow-x: hidden;
         }
         .snow-container {
             position: fixed;
@@ -62,6 +63,7 @@
             border-radius: 15px;
             box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.6);
             max-width: 600px;
+            width: 100%;
             text-align: center;
             animation: fadeIn 2s ease-in-out;
             position: relative;
@@ -89,10 +91,30 @@
             font-size: 1.2rem;
             line-height: 1.6;
             color: #FFFFFF;
+            margin-bottom: 10px;
         }
         .highlight {
             color: #E2BBE9;
             font-weight: bold;
+        }
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-button {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #E2BBE9;
+            color: #5A639C;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .social-button:hover {
+            background-color: #5A639C;
+            color: #E2BBE9;
         }
         @keyframes fadeIn {
             0% {
@@ -102,6 +124,23 @@
             100% {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .social-buttons {
+                flex-direction: column;
+            }
+            .social-button {
+                margin: 10px 0;
             }
         }
     </style>
@@ -117,6 +156,11 @@
         <p>In my free time, I'm also into <span class="highlight">Minecraft</span>.</p>
         <p>When I'm not coding or gaming, I prefer spending time <span class="highlight">alone</span> – it's just how I roll.</p>
         <p>Still going to school, but already building the future!</p>
+        <div class="social-buttons">
+            <a href="https://api.whatsapp.com/send?phone=94715921255" class="social-button" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="https://www.instagram.com/bganime2024" class="social-button" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.tiktok.com/@mcboss224?lang=en" class="social-button" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
     </div>
 
     <script>
