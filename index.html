@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="McBoss - About Me">
+    <meta property="og:description" content="Hi, I'm Miyuru Gunatilake (McBoss). Developer, Gamer, Student from Sri Lanka">
+    <meta property="og:image" content="https://mcboss.top/mcboss.jpg">
+    <link rel="icon" type="image/jpeg" href="https://mcboss.top/mcboss.jpg">
+    <title>McBoss - About Me</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #ff0000;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --light-text: #ffffff;
+            --card-bg: #1e1e1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--darker-bg);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(255, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-red);
+            transition: transform 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(360deg);
+            transition: transform 0.8s ease;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+        }
+
+        .profile-info h1 {
+            color: var(--primary-red);
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .profile-info p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            color: var(--light-text);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .tab-btn:hover::before {
+            left: 100%;
+        }
+
+        .tab-btn.active {
+            background: var(--primary-red);
+            transform: scale(1.05);
+        }
+
+        .tab-content {
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { 
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(-100%);
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to { transform: translateX(0); }
+        }
+
+        .card:nth-child(even) {
+            transform: translateX(100%);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .tooltip {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .social-links a:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: -40px;
+        }
+
+        footer {
+            background: var(--darker-bg);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 2px solid var(--primary-red);
+        }
+
+        footer p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="https://mcboss.top/mcboss.jpg" alt="McBoss" class="profile-img">
+                <div class="profile-info">
+                    <h1>McBoss</h1>
+                    <p>Miyuru Gunatilake</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('about')"><i class="fas fa-user"></i> McBoss</button>
+            <button class="tab-btn" onclick="openTab('likes')"><i class="fas fa-heart"></i> What I Like</button>
+            <button class="tab-btn" onclick="openTab('contact')"><i class="fas fa-envelope"></i> Contact Me</button>
+        </div>
+
+        <div id="about" class="tab-content active">
+            <div class="card">
+                <h2><i class="fas fa-info-circle"></i> About Me</h2>
+                <p>I'm Miyuru Gunatilake, also known as McBoss. Currently a student in Sri Lanka, Colombo.</p>
+                <p>I'm actively working on the MNS Minecraft Network as a WebDev, and I've created LinkRun.xyz, a link shortener service offering unlimited links.</p>
+                <p>My ultimate dream is to relocate to London and start a new chapter in my life.</p>
+            </div>
+        </div>
+
+        <div id="likes" class="tab-content">
+            <div class="card">
+                <h2><i class="fas fa-gamepad"></i> Gaming</h2>
+                <p>I'm passionate about gaming, especially Minecraft and Among Us.</p>
+            </div>
+            <div class="card">
+                <h2><i class="fas fa-code"></i> Programming</h2>
+                <p>I enjoy creating Python projects, including Flask web applications and Discord.py bots.</p>
+                <p>I also offer services creating About Me pages for others at affordable rates.</p>
+            </div>
+            <div class="card">
+                <h2><i class="fas fa-users"></i> Community</h2>
+                <p>I'm an active member of the Territory Of Sadness Discord server, which, despite its name, is a fun and vibrant community.</p>
+            </div>
+        </div>
+
+        <div id="contact" class="tab-content">
+            <div class="card">
+                <h2><i class="fas fa-address-book"></i> Get in Touch</h2>
+                <p>Email: mcboss120@gmail.com</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/mcboss120/" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span class="tooltip">@mcboss120</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@mcboss224" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        <span class="tooltip">@mcboss224</span>
+                    </a>
+                    <a href="https://wa.me/94715921255" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <span class="tooltip">+94 71 592 1255</span>
+                    </a>
+                    <a href="https://discordapp.com/users/1237079597124812862" target="_blank">
+                        <i class="fab fa-discord"></i>
+                        <span class="tooltip">mcboss_99</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 McBoss | Student • Developer • Gamer</p>
+            <p>Made with <i class="fas fa-heart" style="color: var(--primary-red);"></i> in Sri Lanka</p>
+        </div>
+    </footer>
+
+    <script>
+        function openTab(tabName) {
+            const tabContents = document.getElementsByClassName('tab-content');
+            const tabButtons = document.getElementsByClassName('tab-btn');
+            
+            for (let content of tabContents) {
+                content.classList.remove('active');
+            }
+            
+            for (let button of tabButtons) {
+                button.classList.remove('active');
+            }
+            
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            // Reset animations for cards
+            const cards = document.querySelectorAll(`#${tabName} .card`);
+            cards.forEach((card, index) => {
+                card.style.animation = 'none';
+                card.offsetHeight; // Trigger reflow
+                card.style.animation = `slideIn 0.5s ease forwards ${index * 0.2}s`;
+            });
+        }
+    </script>
+</body>
+</html>
