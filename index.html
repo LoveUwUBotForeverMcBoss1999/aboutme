@@ -3,341 +3,649 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="McBoss - About Me">
-    <meta property="og:description" content="Hi, I'm Miyuru Gunatilake (McBoss). Developer, Gamer, Student from Sri Lanka">
-    <meta property="og:image" content="https://mcboss.top/mcboss.jpg">
-    <link rel="icon" type="image/jpeg" href="https://mcboss.top/mcboss.jpg">
-    <title>McBoss - About Me</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>McBoss | The Story</title>
     <style>
         :root {
-            --primary-red: #ff0000;
-            --dark-bg: #121212;
-            --darker-bg: #0a0a0a;
-            --light-text: #ffffff;
-            --card-bg: #1e1e1e;
+            --bg-color: #0a0a0a;
+            --text-color: #f0f0f0;
+            --accent-color: #9147ff; /* Purple accent */
+            --secondary-color: #57b955; /* Green accent */
+            --dark-accent: #151515;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
         }
-
+        
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
-
+        
         header {
-            background-color: var(--darker-bg);
-            padding: 15px 0;
-            box-shadow: 0 2px 10px rgba(255, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 20px;
-        }
-
-        .profile-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid var(--primary-red);
-            transition: transform 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.1) rotate(360deg);
-            transition: transform 0.8s ease;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
-        }
-
-        .profile-info h1 {
-            color: var(--primary-red);
-            font-size: 1.5em;
-            margin: 0;
-        }
-
-        .profile-info p {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        .tabs {
-            display: flex;
             justify-content: center;
-            margin: 20px 0;
-            gap: 10px;
-        }
-
-        .tab-btn {
-            background: var(--card-bg);
-            color: var(--light-text);
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 5px;
+            padding: 40px 0;
             position: relative;
             overflow: hidden;
         }
-
-        .tab-btn::before {
+        
+        header::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
-            transition: 0.5s;
+            background: linear-gradient(45deg, rgba(145,71,255,0.2), rgba(87,185,85,0.2));
+            z-index: -1;
         }
-
-        .tab-btn:hover::before {
-            left: 100%;
-        }
-
-        .tab-btn.active {
-            background: var(--primary-red);
-            transform: scale(1.05);
-        }
-
-        .tab-content {
-            display: none;
-            animation: slideUp 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes slideUp {
-            from { 
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
+        
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            box-shadow: 0 0 30px rgba(145, 71, 255, 0.6);
             margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transform: translateX(-100%);
-            animation: slideIn 0.5s ease forwards;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-
-        @keyframes slideIn {
-            to { transform: translateX(0); }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(145, 71, 255, 0.8);
         }
-
-        .card:nth-child(even) {
-            transform: translateX(100%);
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(145, 71, 255, 0.7);
         }
-
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .divider {
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            margin: 20px auto;
+        }
+        
+        .story-container {
+            background-color: var(--dark-accent);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-container::after {
+            content: '< / >';
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 2rem;
+            color: rgba(145, 71, 255, 0.2);
+            font-weight: bold;
+        }
+        
+        .chapter {
+            margin-bottom: 40px;
+        }
+        
+        .chapter-title {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .chapter-title::before {
+            content: '//';
+            margin-right: 10px;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(145, 71, 255, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(145, 71, 255, 0.5);
+        }
+        
+        .badge.green {
+            background-color: var(--secondary-color);
+            box-shadow: 0 3px 10px rgba(87, 185, 85, 0.3);
+        }
+        
+        .badge.green:hover {
+            box-shadow: 0 5px 15px rgba(87, 185, 85, 0.5);
+        }
+        
+        .parallax {
+            position: relative;
+            padding: 40px 0;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 50px 0;
+        }
+        
+        .parallax-content {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 1.4rem;
+            text-align: center;
+            margin: 30px 0;
+            color: var(--secondary-color);
+            position: relative;
+            padding: 0 40px;
+        }
+        
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            color: var(--accent-color);
+            opacity: 0.6;
+        }
+        
+        .quote::before {
+            top: -20px;
+            left: 0;
+        }
+        
+        .quote::after {
+            bottom: -40px;
+            right: 0;
+        }
+        
+        .glitch-text {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { text-shadow: 0 0 0 transparent; }
+            2% { text-shadow: 2px 0 0 var(--accent-color), -2px 0 0 var(--secondary-color); }
+            4% { text-shadow: 0 0 0 transparent; }
+            25% { text-shadow: 0 0 0 transparent; }
+            27% { text-shadow: 2px 0 0 var(--accent-color), -2px 0 0 var(--secondary-color); }
+            29% { text-shadow: 0 0 0 transparent; }
+            80% { text-shadow: 0 0 0 transparent; }
+            82% { text-shadow: 2px 0 0 var(--accent-color), -2px 0 0 var(--secondary-color); }
+            84% { text-shadow: 0 0 0 transparent; }
+            100% { text-shadow: 0 0 0 transparent; }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            background-color: var(--dark-accent);
+            border-top: 2px solid var(--accent-color);
+        }
+        
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
             flex-wrap: wrap;
-            margin-top: 20px;
+            gap: 20px;
+            margin: 20px 0;
         }
-
-        .social-links a {
-            color: var(--light-text);
-            font-size: 24px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-red);
-            transform: translateY(-5px);
-        }
-
-        .tooltip {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--card-bg);
-            padding: 5px 10px;
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background-color: var(--dark-accent);
+            border: 1px solid var(--accent-color);
             border-radius: 5px;
-            font-size: 12px;
-            opacity: 0;
-            visibility: hidden;
+            color: var(--text-color);
+            text-decoration: none;
             transition: all 0.3s ease;
-            white-space: nowrap;
         }
-
-        .social-links a:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-            bottom: -40px;
+        
+        .social-link:hover {
+            background-color: rgba(145, 71, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-
-        footer {
-            background: var(--darker-bg);
-            padding: 20px 0;
+        
+        .social-link i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .social-link .username {
+            transition: color 0.3s ease;
+        }
+        
+        .social-link:hover .username {
+            color: var(--accent-color);
+        }
+        
+        .email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .email-link:hover {
+            background-color: rgba(145, 71, 255, 0.1);
+        }
+        
+        .email-link i {
+            color: var(--accent-color);
+        }
+        
+        .projects-container {
+            background-color: var(--dark-accent);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(20, 20, 20, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .project-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-title {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
             text-align: center;
-            margin-top: 40px;
-            border-top: 2px solid var(--primary-red);
         }
-
-        footer p {
-            font-size: 0.9em;
-            opacity: 0.8;
+        
+        .project-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 15px;
         }
-
+        
+        .project-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .anime-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .anime-badge {
+            display: inline-block;
+            background-color: rgba(20, 20, 20, 0.7);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .anime-badge:hover {
+            background-color: rgba(145, 71, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
+            h1 {
+                font-size: 2.5rem;
             }
             
-            .tabs {
-                flex-direction: column;
+            .profile-pic {
+                width: 150px;
+                height: 150px;
             }
             
-            .tab-btn {
-                width: 100%;
+            .story-container, .projects-container {
+                padding: 20px;
+            }
+            
+            .chapter-title {
+                font-size: 1.6rem;
+            }
+            
+            .quote {
+                font-size: 1.2rem;
+                padding: 0 30px;
+            }
+            
+            .badge {
+                margin-bottom: 8px;
             }
             
             .social-links {
+                flex-direction: column;
+                align-items: center;
                 gap: 15px;
             }
+            
+            .project-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .chapter-title {
+                font-size: 1.4rem;
+            }
+            
+            .project-logo {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        /* Matrix rain effect */
+        .matrix-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.15;
+        }
+
+        canvas {
+            display: block;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <img src="https://mcboss.top/mcboss.jpg" alt="McBoss" class="profile-img">
-                <div class="profile-info">
-                    <h1>McBoss</h1>
-                    <p>Miyuru Gunatilake</p>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab('about')"><i class="fas fa-user"></i> McBoss</button>
-            <button class="tab-btn" onclick="openTab('likes')"><i class="fas fa-heart"></i> What I Like</button>
-            <button class="tab-btn" onclick="openTab('contact')"><i class="fas fa-envelope"></i> Contact Me</button>
-        </div>
-
-        <div id="about" class="tab-content active">
-            <div class="card">
-                <h2><i class="fas fa-info-circle"></i> About Me</h2>
-                <p>I'm Miyuru Gunatilake, also known as McBoss. Currently a student in Sri Lanka, Colombo.</p>
-                <p>I'm actively working on the MNS Minecraft Network as a WebDev, and I've created LinkRun.xyz, a link shortener service offering unlimited links.</p>
-                <p>My ultimate dream is to relocate to London and start a new chapter in my life.</p>
-            </div>
-        </div>
-
-        <div id="likes" class="tab-content">
-            <div class="card">
-                <h2><i class="fas fa-gamepad"></i> Gaming</h2>
-                <p>I'm passionate about gaming, especially Minecraft and Among Us.</p>
-            </div>
-            <div class="card">
-                <h2><i class="fas fa-code"></i> Programming</h2>
-                <p>I enjoy creating Python projects, including Flask web applications and Discord.py bots.</p>
-                <p>I also offer services creating About Me pages for others at affordable rates.</p>
-            </div>
-            <div class="card">
-                <h2><i class="fas fa-users"></i> Community</h2>
-                <p>I'm an active member of the Territory Of Sadness Discord server, which, despite its name, is a fun and vibrant community.</p>
-            </div>
-        </div>
-
-        <div id="contact" class="tab-content">
-            <div class="card">
-                <h2><i class="fas fa-address-book"></i> Get in Touch</h2>
-                <p>Email: mcboss120@gmail.com</p>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/mcboss120/" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                        <span class="tooltip">@mcboss120</span>
-                    </a>
-                    <a href="https://www.tiktok.com/@mcboss224" target="_blank">
-                        <i class="fab fa-tiktok"></i>
-                        <span class="tooltip">@mcboss224</span>
-                    </a>
-                    <a href="https://wa.me/94715921255" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        <span class="tooltip">+94 71 592 1255</span>
-                    </a>
-                    <a href="https://discordapp.com/users/1237079597124812862" target="_blank">
-                        <i class="fab fa-discord"></i>
-                        <span class="tooltip">mcboss_99</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <!-- Matrix rain background -->
+    <div class="matrix-container">
+        <canvas id="matrix"></canvas>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>© 2024 McBoss | Student • Developer • Gamer</p>
-            <p>Made with <i class="fas fa-heart" style="color: var(--primary-red);"></i> in Sri Lanka</p>
+    <div class="container">
+        <header>
+            <img src="https://mcboss.top/mcboss.jpg" alt="McBoss" class="profile-pic">
+            <h1 class="glitch-text">Miyuru Gunatilake</h1>
+            <p class="tagline">// AKA <span class="highlight">McBoss</span> // <span class="highlight">[He/Him]</span> // <span class="highlight">Developer</span> //</p>
+        </header>
+        
+        <div class="story-container">
+            <div class="chapter">
+                <h2 class="chapter-title">Origin Story</h2>
+                <p>In the island nation of <span class="highlight">Sri Lanka</span>, where the Indian Ocean whispers secrets to ancient temples, a young coder was born. They call me <span class="highlight">Miyuru Gunatilake</span>, but in the digital realm, I'm known as <span class="highlight">McBoss</span>.</p>
+                
+                <p>Still navigating the labyrinth of education, I'm not just another student moving through the system. I'm a <span class="highlight">creator</span>, a <span class="highlight">builder</span>, a <span class="highlight">dreamer</span> with fingers dancing across keyboards, crafting worlds from nothing but logic and imagination.</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">The Code Chronicles</h2>
+                <p>Python isn't just a language to me—it's a <span class="highlight">weapon</span> of creation. Each line of code is another step toward bending reality to my will. The journey of a <span class="highlight">software engineer</span> isn't just a career path; it's my calling. When others see limitations, I see only problems waiting for elegant solutions.</p>
+                
+                <p>My digital playground extends beyond the command line. Whether I'm building worlds block by block in <span class="highlight">Minecraft</span> or strategizing the perfect betrayal in <span class="highlight">Among Us</span>, gaming isn't just entertainment—it's research, inspiration, and battlefield training for the mind.</p>
+                
+                <div class="skills">
+                    <div class="badge">Python</div>
+                    <div class="badge green">Problem Solver</div>
+                    <div class="badge">Creative Mind</div>
+                    <div class="badge green">Future Engineer</div>
+                    <div class="badge">Minecraft Architect</div>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">The London Dream</h2>
+                <p>While Sri Lanka's shores hold my present, <span class="highlight">London</span> calls to my future. The fog-draped city of innovation and history beckons—a digital mecca where tech dreams crystallize into reality. One day, those ancient streets will feel my footsteps as I claim my place among the architects of tomorrow's world.</p>
+                
+                <p>Not just a destination on a map, London represents the journey of transformation—from island coder to global creator. The concrete jungle awaits, and I'm already building the bridge to get there, one algorithm at a time.</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">The Path Less Traveled</h2>
+                <p>Don't mistake my focus for coldness. I'm forging something more lasting—a legacy in code. While others chase fleeting connections, I'm rewriting the future with each keystroke.</p>
+                
+                <p>I don't follow paths—I create them. Conventional metrics of success mean nothing when you're designing your own game. Looks fade, but code that changes the world is immortal.</p>
+                
+                <p>This isn't arrogance—it's clarity of purpose. When you know exactly what you're building, distractions become obvious, and priorities become non-negotiable.</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">Anime: Stories That Shaped Me</h2>
+                <p>Beyond the digital realm, I find inspiration and escape in the vibrant worlds of <span class="highlight">anime</span>. These aren't just cartoons—they're portals to universes where characters face impossible odds with unbreakable resolve.</p>
+                
+                <p>The breathtaking visuals of <span class="highlight">Your Name</span> showed me how beauty can elevate storytelling. The determination of characters in <span class="highlight">Naruto</span> taught me about persistence in the face of overwhelming challenges. The subtle emotional depth of <span class="highlight">A Silent Voice</span> reminded me that beneath our digital personas, we're all searching for connection and understanding.</p>
+                
+                <p>In <span class="highlight">Shikimori's Not Just a Cutie</span>, I found characters that defy simple categorization—much like the code I aspire to write: elegant on the surface, powerful underneath. These stories aren't distractions from my path; they're fuel for the journey—teaching lessons about resilience, creativity, and the unexpected ways we connect with others.</p>
+                
+                <div class="anime-grid">
+                    <span class="anime-badge">Your Name</span>
+                    <span class="anime-badge">Naruto</span>
+                    <span class="anime-badge">A Silent Voice</span>
+                    <span class="anime-badge">Shikimori's Not Just a Cutie</span>
+                    <span class="anime-badge">Attack on Titan</span>
+                    <span class="anime-badge">One Piece</span>
+                    <span class="anime-badge">Demon Slayer</span>
+                </div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="chapter">
+                <h2 class="chapter-title">The Architect's Vision</h2>
+                <p>Every great story is built on creativity, and that's the foundation of my existence. As a <span class="highlight">creative person</span>, I see connections where others see chaos. In the space between logic and imagination, I find my truest expression.</p>
+                
+                <p>The digital landscapes I create today are just prototypes for the worlds I'll build tomorrow. Each project, each line of code, each game strategy is another brick in the monument I'm building to possibility.</p>
+                
+                <p>This isn't just an "about me" page—it's a <span class="highlight">declaration of intent</span>. A roadmap for a journey that's already in progress. Whether you're here as an observer, a collaborator, or a rival, know this: The story of McBoss is still being written, and the most extraordinary chapters lie ahead.</p>
+            </div>
         </div>
-    </footer>
+        
+        <div class="quote">
+            "In a world of users, be a developer. In a realm of followers, be a creator."
+        </div>
+        
+        <div class="projects-container">
+            <h2 class="chapter-title">What I've Built</h2>
+            
+            <div class="project-card">
+                <img src="https://mcboss.top/T.jpg" alt="LinkRun.xyz" class="project-logo">
+                <h3 class="project-title">LinkRun.xyz</h3>
+                <p>A professional URL shortening service that I've developed, offering advanced features for link management and optimization. LinkRun.xyz provides custom URLs, QR code generation, password protection, and comprehensive link analytics.</p>
+                <p>The platform allows users to create unlimited shortened links with enhanced tracking capabilities, making it perfect for social media campaigns, marketing efforts, and professional link management.</p>
+                <a href="https://linkrun.xyz/register" class="project-link">
+                    <i class="fas fa-external-link-alt"></i> Visit LinkRun.xyz
+                </a>
+            </div>
+            
+            <p>More projects coming soon. The digital forge is always hot, and new creations are constantly in development. Stay tuned for updates as I continue to expand my portfolio and push the boundaries of what's possible.</p>
+        </div>
+        
+        <footer>
+            <div class="social-links">
+                <a href="https://www.instagram.com/mcboss120/" class="social-link" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span class="username">mcboss120</span>
+                </a>
+                <a href="https://www.tiktok.com/@mcboss224" class="social-link" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                    <span class="username">mcboss224</span>
+                </a>
+                <a href="https://discordapp.com/users/1237079597124812862" class="social-link" target="_blank">
+                    <i class="fab fa-discord"></i>
+                    <span class="username">McBoss</span>
+                </a>
+            </div>
+            
+            <a href="mailto:mcboss120@gmail.com" class="email-link">
+                <i class="fas fa-envelope"></i>
+                mcboss120@gmail.com
+            </a>
+            
+            <p style="margin-top: 20px;">© 2025 Miyuru "McBoss" Gunatilake | The Digital Saga Continues</p>
+        </footer>
+    </div>
 
     <script>
-        function openTab(tabName) {
-            const tabContents = document.getElementsByClassName('tab-content');
-            const tabButtons = document.getElementsByClassName('tab-btn');
-            
-            for (let content of tabContents) {
-                content.classList.remove('active');
-            }
-            
-            for (let button of tabButtons) {
-                button.classList.remove('active');
-            }
-            
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
-
-            // Reset animations for cards
-            const cards = document.querySelectorAll(`#${tabName} .card`);
-            cards.forEach((card, index) => {
-                card.style.animation = 'none';
-                card.offsetHeight; // Trigger reflow
-                card.style.animation = `slideIn 0.5s ease forwards ${index * 0.2}s`;
-            });
+        // Matrix rain effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const code = katakana + latin + nums;
+        
+        const columns = canvas.width / 20;
+        const drops = [];
+        
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
         }
+        
+        function draw() {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#9147ff';
+            ctx.font = '20px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = code.charAt(Math.floor(Math.random() * code.length));
+                ctx.fillText(text, i * 20, drops[i] * 20);
+                
+                if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(draw, 35);
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
