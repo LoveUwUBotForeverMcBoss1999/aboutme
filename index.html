@@ -592,7 +592,7 @@
                     </svg>
                 </div>
                 <div class="social-name">Discord</div>
-                <div class="social-handle">Profile</div>
+                <div class="social-handle" id="discord-username" style="cursor:pointer;" onclick="window.open(`https://discordapp.com/users/${DISCORD_ID}`, '_blank')">Loading...</div>
             </div>
         </div>
 
@@ -745,6 +745,8 @@
             
             // Update activities
             updateActivities();
+
+            updateDiscordUsername();
         }
 
         function updateStatus() {
@@ -952,6 +954,19 @@
         }
 
         setInterval(createAsh, 150);
+
+
+
+        function updateDiscordUsername() {
+            const nameEl = document.getElementById('discord-username');
+            if (currentData && currentData.discord_user) {
+                const user = currentData.discord_user;
+                nameEl.textContent = user.discriminator === '0'
+                ? `@${user.username}`
+                : `${user.username}#${user.discriminator}`;
+            }
+        }
+
     </script>
 </body>
 </html>
