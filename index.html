@@ -3,649 +3,1676 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McBoss | The Story</title>
+    <title id="page-title">Loading... - Discord Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color: #0a0a0a;
-            --text-color: #f0f0f0;
-            --accent-color: #9147ff; /* Purple accent */
-            --secondary-color: #57b955; /* Green accent */
-            --dark-accent: #151515;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(145,71,255,0.2), rgba(87,185,85,0.2));
-            z-index: -1;
-        }
-        
-        .profile-pic {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-color);
-            box-shadow: 0 0 30px rgba(145, 71, 255, 0.6);
-            margin-bottom: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .profile-pic:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(145, 71, 255, 0.8);
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(145, 71, 255, 0.7);
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .divider {
-            width: 80%;
-            height: 3px;
-            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
-            margin: 20px auto;
-        }
-        
-        .story-container {
-            background-color: var(--dark-accent);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .story-container::after {
-            content: '< / >';
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-            font-size: 2rem;
-            color: rgba(145, 71, 255, 0.2);
-            font-weight: bold;
-        }
-        
-        .chapter {
-            margin-bottom: 40px;
-        }
-        
-        .chapter-title {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .chapter-title::before {
-            content: '//';
-            margin-right: 10px;
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-        
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        .highlight {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        
-        .badge {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(145, 71, 255, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(145, 71, 255, 0.5);
-        }
-        
-        .badge.green {
-            background-color: var(--secondary-color);
-            box-shadow: 0 3px 10px rgba(87, 185, 85, 0.3);
-        }
-        
-        .badge.green:hover {
-            box-shadow: 0 5px 15px rgba(87, 185, 85, 0.5);
-        }
-        
-        .parallax {
-            position: relative;
-            padding: 40px 0;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            margin: 50px 0;
-        }
-        
-        .parallax-content {
-            background-color: rgba(10, 10, 10, 0.8);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-        }
-        
-        .quote {
-            font-style: italic;
-            font-size: 1.4rem;
-            text-align: center;
-            margin: 30px 0;
-            color: var(--secondary-color);
-            position: relative;
-            padding: 0 40px;
-        }
-        
-        .quote::before, .quote::after {
-            content: '"';
-            font-size: 3rem;
-            position: absolute;
-            color: var(--accent-color);
-            opacity: 0.6;
-        }
-        
-        .quote::before {
-            top: -20px;
-            left: 0;
-        }
-        
-        .quote::after {
-            bottom: -40px;
-            right: 0;
-        }
-        
-        .glitch-text {
-            position: relative;
-            animation: glitch 3s infinite;
-        }
-        
-        @keyframes glitch {
-            0% { text-shadow: 0 0 0 transparent; }
-            2% { text-shadow: 2px 0 0 var(--accent-color), -2px 0 0 var(--secondary-color); }
-            4% { text-shadow: 0 0 0 transparent; }
-            25% { text-shadow: 0 0 0 transparent; }
-            27% { text-shadow: 2px 0 0 var(--accent-color), -2px 0 0 var(--secondary-color); }
-            29% { text-shadow: 0 0 0 transparent; }
-            80% { text-shadow: 0 0 0 transparent; }
-            82% { text-shadow: 2px 0 0 var(--accent-color), -2px 0 0 var(--secondary-color); }
-            84% { text-shadow: 0 0 0 transparent; }
-            100% { text-shadow: 0 0 0 transparent; }
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            background-color: var(--dark-accent);
-            border-top: 2px solid var(--accent-color);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 15px;
-            background-color: var(--dark-accent);
-            border: 1px solid var(--accent-color);
-            border-radius: 5px;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background-color: rgba(145, 71, 255, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .social-link i {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-        
-        .social-link .username {
-            transition: color 0.3s ease;
-        }
-        
-        .social-link:hover .username {
-            color: var(--accent-color);
-        }
-        
-        .email-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .email-link:hover {
-            background-color: rgba(145, 71, 255, 0.1);
-        }
-        
-        .email-link i {
-            color: var(--accent-color);
-        }
-        
-        .projects-container {
-            background-color: var(--dark-accent);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-        }
-        
-        .project-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: rgba(20, 20, 20, 0.7);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-        
-        .project-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .project-title {
-            font-size: 1.8rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .project-link {
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 15px;
-        }
-        
-        .project-link:hover {
-            color: var(--accent-color);
-        }
-        
-        .anime-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-        
-        .anime-badge {
-            display: inline-block;
-            background-color: rgba(20, 20, 20, 0.7);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid var(--accent-color);
-            transition: all 0.3s ease;
-        }
-        
-        .anime-badge:hover {
-            background-color: rgba(145, 71, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Mobile responsiveness */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .profile-pic {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .story-container, .projects-container {
-                padding: 20px;
-            }
-            
-            .chapter-title {
-                font-size: 1.6rem;
-            }
-            
-            .quote {
-                font-size: 1.2rem;
-                padding: 0 30px;
-            }
-            
-            .badge {
-                margin-bottom: 8px;
-            }
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .project-title {
-                font-size: 1.5rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .profile-pic {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            p {
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-            
-            .chapter-title {
-                font-size: 1.4rem;
-            }
-            
-            .project-logo {
-                width: 100px;
-                height: 100px;
-            }
         }
 
-        /* Matrix rain effect */
-        .matrix-container {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: url('https://i.pinimg.com/originals/e8/fb/67/e8fb6770f051b86fcdecaf968723b893.gif') center/cover fixed;
+            overflow-x: hidden;
+            /* Changed: Remove flex centering from body */
+            padding: 20px 0;
+        }
+
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(2px);
             z-index: -1;
-            overflow: hidden;
-            opacity: 0.15;
         }
 
-        canvas {
-            display: block;
+        /* NEW: Main container to hold both profile and servers */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            min-height: calc(100vh - 40px);
+            justify-content: flex-start;
+        }
+
+        .profile-container {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: slideIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #5865F2;
+            animation: avatarGlow 2s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+
+        .avatar:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes avatarGlow {
+            from { box-shadow: 0 0 20px rgba(88, 101, 242, 0.5); }
+            to { box-shadow: 0 0 30px rgba(88, 101, 242, 0.8); }
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 3px solid white;
+            animation: pulse 2s infinite;
+        }
+
+        .status-online { background-color: #3ba55c; }
+        .status-idle { background-color: #faa61a; }
+        .status-dnd { background-color: #ed4245; }
+        .status-offline { background-color: #747f8d; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .username {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: textGlow 3s ease-in-out infinite alternate;
+            min-height: 1.2em; /* 👈 This keeps space even when no text */
+        }
+
+
+        @keyframes textGlow {
+            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+            to { text-shadow: 2px 2px 20px rgba(88, 101, 242, 0.6); }
+        }
+
+        .status-text {
+            color: #b9bbbe;
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .activity {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #5865F2;
+            animation: fadeInUp 1s ease-out 0.5s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-spotify {
+            border-left-color: #1db954;
+        }
+
+        .activity-game {
+            border-left-color: #7289da;
+        }
+
+        .activity-streaming {
+            border-left-color: #9146ff;
+        }
+
+        .activity-watching {
+            border-left-color: #f04747;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .activity-with-image {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .activity-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .activity-icon {
+            font-size: 16px;
+        }
+
+        .activity-title {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .activity-details {
+            color: #b9bbbe;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .activity-timestamp {
+            color: #72767d;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .spotify-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .spotify-progress-bar {
+            height: 100%;
+            background: #1db954;
+            border-radius: 2px;
+            transition: width 1s ease;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .social-link:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .instagram:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(240, 148, 51, 0.4);
+        }
+
+        .tiktok {
+            background: linear-gradient(45deg, #ff0050, #00f2ea);
+        }
+
+        .tiktok:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 0, 80, 0.4);
+        }
+
+        .discord {
+            background: #5865F2;
+        }
+
+        .discord:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .social-link i {
+            color: white;
+            font-size: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .last-updated {
+            color: #72767d;
+            font-size: 11px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(88, 101, 242, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .connection-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .connection-online {
+            background: rgba(59, 165, 92, 0.2);
+            color: #3ba55c;
+            border: 1px solid #3ba55c;
+        }
+
+        .connection-offline {
+            background: rgba(237, 66, 69, 0.2);
+            color: #ed4245;
+            border: 1px solid #ed4245;
+        }
+
+        .presence-status {
+            color: #b9bbbe;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            border: 2px solid;
+            transition: all 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .presence-online {
+            color: #3ba55c;
+            background: rgba(59, 165, 92, 0.1);
+            border-color: #3ba55c;
+            box-shadow: 0 0 10px rgba(59, 165, 92, 0.3);
+        }
+
+        .presence-idle {
+            color: #faa61a;
+            background: rgba(250, 166, 26, 0.1);
+            border-color: #faa61a;
+            box-shadow: 0 0 10px rgba(250, 166, 26, 0.3);
+        }
+
+        .presence-dnd {
+            color: #ed4245;
+            background: rgba(237, 66, 69, 0.1);
+            border-color: #ed4245;
+            box-shadow: 0 0 10px rgba(237, 66, 69, 0.3);
+        }
+
+        .presence-offline {
+            color: #747f8d;
+            background: rgba(116, 127, 141, 0.1);
+            border-color: #747f8d;
+        }
+
+        .activity-listening {
+            border-left-color: #1db954;
+        }
+
+        .music-progress-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 8px 0;
+        }
+
+        .progress-time {
+            color: #b9bbbe;
+            font-size: 11px;
+            font-weight: 500;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .music-progress-bar {
+            flex: 1;
+            position: relative;
+            height: 6px;
+            border-radius: 3px;
+            overflow: visible;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #1db954, #1ed760);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 8px rgba(29, 185, 84, 0.4);
+        }
+
+        .progress-handle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            color: #1db954;
+            font-size: 8px;
+            text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+            transition: left 0.5s ease;
+            animation: handlePulse 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes handlePulse {
+            0%, 100% { 
+                transform: translateY(-50%) translateX(-50%) scale(1);
+                filter: drop-shadow(0 0 2px rgba(29, 185, 84, 0.6));
+            }
+            50% { 
+                transform: translateY(-50%) translateX(-50%) scale(1.2);
+                filter: drop-shadow(0 0 6px rgba(29, 185, 84, 0.9));
+            }
+        }
+
+        /* Remove old spotify progress classes */
+        .spotify-progress,
+        .spotify-progress-bar {
+            display: none !important;
+        }
+
+        .servers-container {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+            width: 90%;
+            animation: slideIn 1s ease-out 0.3s both;
+            position: relative;
+            overflow: hidden;
+            max-width: 500px;
+            /* CHANGED: Remove margin */
+        }
+
+        .servers-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+        }
+
+        .servers-title {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .servers-title i {
+            color: #5865F2;
+            font-size: 26px;
+        }
+
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .server-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .server-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(88, 101, 242, 0.2);
+            border-color: rgba(88, 101, 242, 0.3);
+        }
+
+        .server-banner {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #5865F2, #7289da);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .server-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+        }
+
+        .server-info {
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            position: relative;
+        }
+
+        .server-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #5865F2;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .server-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .server-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .server-name {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            word-wrap: break-word;
+        }
+
+        .server-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 15px;
+        }
+
+        .server-stat {
+            color: #b9bbbe;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .server-stat i {
+            width: 12px;
+            text-align: center;
+        }
+
+        .stat-online {
+            color: #3ba55c;
+        }
+
+        .stat-members {
+            color: #7289da;
+        }
+
+        .join-button {
+            background: linear-gradient(45deg, #5865F2, #7289da);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(88, 101, 242, 0.3);
+        }
+
+        .join-button:hover {
+            background: linear-gradient(45deg, #4752c4, #5b6cd4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .join-button i {
+            font-size: 12px;
+        }
+
+        .servers-loading {
+            text-align: center;
+            color: #b9bbbe;
+            font-size: 16px;
+            padding: 40px;
+        }
+
+        .servers-loading i {
+            color: #5865F2;
+            margin-right: 10px;
+        }
+
+        .server-error {
+            background: rgba(237, 66, 69, 0.1);
+            border: 1px solid rgba(237, 66, 69, 0.3);
+            color: #ed4245;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Animation delays for staggered effect */
+        .server-card:nth-child(1) { animation-delay: 0.1s; }
+        .server-card:nth-child(2) { animation-delay: 0.2s; }
+        .server-card:nth-child(3) { animation-delay: 0.3s; }
+        .server-card:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 10px;
+                gap: 20px;
+            }
+            
+            .profile-container {
+                padding: 30px 20px;
+            }
+            
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+        
+            .username {
+                font-size: 24px;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+
+            .activity-with-image {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .activity-content {
+                text-align: center;
+            }
+            
+            .servers-container {
+                max-width: 500px; /* same as .profile-container */
+                width: 90%;
+            }
+            
+            .servers-grid {
+                display: grid;
+                grid-template-columns: 1fr; /* Force one server per row */
+                gap: 20px;
+            }
+            
+            .server-info {
+                padding: 15px;
+                gap: 12px;
+            }
+            
+            .server-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .server-name {
+                font-size: 16px;
+            }
+            
+            .servers-title {
+                font-size: 20px;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Matrix rain background -->
-    <div class="matrix-container">
-        <canvas id="matrix"></canvas>
-    </div>
-
-    <div class="container">
-        <header>
-            <img src="https://mcboss.top/mcboss.jpg" alt="McBoss" class="profile-pic">
-            <h1 class="glitch-text">Miyuru Gunatilake</h1>
-            <p class="tagline">// AKA <span class="highlight">McBoss</span> // <span class="highlight">[He/Him]</span> // <span class="highlight">Developer</span> //</p>
-        </header>
-        
-        <div class="story-container">
-            <div class="chapter">
-                <h2 class="chapter-title">Origin Story</h2>
-                <p>In the island nation of <span class="highlight">Sri Lanka</span>, where the Indian Ocean whispers secrets to ancient temples, a young coder was born. They call me <span class="highlight">Miyuru Gunatilake</span>, but in the digital realm, I'm known as <span class="highlight">McBoss</span>.</p>
-                
-                <p>Still navigating the labyrinth of education, I'm not just another student moving through the system. I'm a <span class="highlight">creator</span>, a <span class="highlight">builder</span>, a <span class="highlight">dreamer</span> with fingers dancing across keyboards, crafting worlds from nothing but logic and imagination.</p>
+    <div class="overlay"></div>
+    <div class="floating-particles" id="particles"></div>
+    
+    <!-- NEW: Main container wrapper -->
+    <div class="main-container">
+        <div class="profile-container">
+            <div class="connection-status" id="connection-status">
+                <i class="fas fa-circle"></i> OFFLINE
             </div>
             
-            <div class="divider"></div>
-            
-            <div class="chapter">
-                <h2 class="chapter-title">The Code Chronicles</h2>
-                <p>Python isn't just a language to me—it's a <span class="highlight">weapon</span> of creation. Each line of code is another step toward bending reality to my will. The journey of a <span class="highlight">software engineer</span> isn't just a career path; it's my calling. When others see limitations, I see only problems waiting for elegant solutions.</p>
-                
-                <p>My digital playground extends beyond the command line. Whether I'm building worlds block by block in <span class="highlight">Minecraft</span> or strategizing the perfect betrayal in <span class="highlight">Among Us</span>, gaming isn't just entertainment—it's research, inspiration, and battlefield training for the mind.</p>
-                
-                <div class="skills">
-                    <div class="badge">Python</div>
-                    <div class="badge green">Problem Solver</div>
-                    <div class="badge">Creative Mind</div>
-                    <div class="badge green">Future Engineer</div>
-                    <div class="badge">Minecraft Architect</div>
-                </div>
+            <div class="avatar-container">
+                <img id="discord-avatar" class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Discord Avatar">
+                <div id="status-indicator" class="status-indicator status-offline"></div>
             </div>
             
-            <div class="divider"></div>
+            <div id="discord-username" class="username"></div>
+            <div id="discord-status" class="status-text" style="display: none;">Custom Status</div>
+            <div id="discord-presence-status" class="presence-status">Offline</div>
             
-            <div class="chapter">
-                <h2 class="chapter-title">The London Dream</h2>
-                <p>While Sri Lanka's shores hold my present, <span class="highlight">London</span> calls to my future. The fog-draped city of innovation and history beckons—a digital mecca where tech dreams crystallize into reality. One day, those ancient streets will feel my footsteps as I claim my place among the architects of tomorrow's world.</p>
-                
-                <p>Not just a destination on a map, London represents the journey of transformation—from island coder to global creator. The concrete jungle awaits, and I'm already building the bridge to get there, one algorithm at a time.</p>
+            <div id="discord-activities" class="activities-container" style="display: none;">
+                <!-- Activities will be dynamically inserted here -->
             </div>
             
-            <div class="divider"></div>
-            
-            <div class="chapter">
-                <h2 class="chapter-title">The Path Less Traveled</h2>
-                <p>Don't mistake my focus for coldness. I'm forging something more lasting—a legacy in code. While others chase fleeting connections, I'm rewriting the future with each keystroke.</p>
-                
-                <p>I don't follow paths—I create them. Conventional metrics of success mean nothing when you're designing your own game. Looks fade, but code that changes the world is immortal.</p>
-                
-                <p>This isn't arrogance—it's clarity of purpose. When you know exactly what you're building, distractions become obvious, and priorities become non-negotiable.</p>
-            </div>
-            
-            <div class="divider"></div>
-            
-            <div class="chapter">
-                <h2 class="chapter-title">Anime: Stories That Shaped Me</h2>
-                <p>Beyond the digital realm, I find inspiration and escape in the vibrant worlds of <span class="highlight">anime</span>. These aren't just cartoons—they're portals to universes where characters face impossible odds with unbreakable resolve.</p>
-                
-                <p>The breathtaking visuals of <span class="highlight">Your Name</span> showed me how beauty can elevate storytelling. The determination of characters in <span class="highlight">Naruto</span> taught me about persistence in the face of overwhelming challenges. The subtle emotional depth of <span class="highlight">A Silent Voice</span> reminded me that beneath our digital personas, we're all searching for connection and understanding.</p>
-                
-                <p>In <span class="highlight">Shikimori's Not Just a Cutie</span>, I found characters that defy simple categorization—much like the code I aspire to write: elegant on the surface, powerful underneath. These stories aren't distractions from my path; they're fuel for the journey—teaching lessons about resilience, creativity, and the unexpected ways we connect with others.</p>
-                
-                <div class="anime-grid">
-                    <span class="anime-badge">Your Name</span>
-                    <span class="anime-badge">Naruto</span>
-                    <span class="anime-badge">A Silent Voice</span>
-                    <span class="anime-badge">Shikimori's Not Just a Cutie</span>
-                    <span class="anime-badge">Attack on Titan</span>
-                    <span class="anime-badge">One Piece</span>
-                    <span class="anime-badge">Demon Slayer</span>
-                </div>
-            </div>
-            
-            <div class="divider"></div>
-            
-            <div class="chapter">
-                <h2 class="chapter-title">The Architect's Vision</h2>
-                <p>Every great story is built on creativity, and that's the foundation of my existence. As a <span class="highlight">creative person</span>, I see connections where others see chaos. In the space between logic and imagination, I find my truest expression.</p>
-                
-                <p>The digital landscapes I create today are just prototypes for the worlds I'll build tomorrow. Each project, each line of code, each game strategy is another brick in the monument I'm building to possibility.</p>
-                
-                <p>This isn't just an "about me" page—it's a <span class="highlight">declaration of intent</span>. A roadmap for a journey that's already in progress. Whether you're here as an observer, a collaborator, or a rival, know this: The story of McBoss is still being written, and the most extraordinary chapters lie ahead.</p>
-            </div>
-        </div>
-        
-        <div class="quote">
-            "In a world of users, be a developer. In a realm of followers, be a creator."
-        </div>
-        
-        <div class="projects-container">
-            <h2 class="chapter-title">What I've Built</h2>
-            
-            <div class="project-card">
-                <img src="https://mcboss.top/T.jpg" alt="LinkRun.xyz" class="project-logo">
-                <h3 class="project-title">LinkRun.xyz</h3>
-                <p>A professional URL shortening service that I've developed, offering advanced features for link management and optimization. LinkRun.xyz provides custom URLs, QR code generation, password protection, and comprehensive link analytics.</p>
-                <p>The platform allows users to create unlimited shortened links with enhanced tracking capabilities, making it perfect for social media campaigns, marketing efforts, and professional link management.</p>
-                <a href="https://linkrun.xyz/register" class="project-link">
-                    <i class="fas fa-external-link-alt"></i> Visit LinkRun.xyz
-                </a>
-            </div>
-            
-            <p>More projects coming soon. The digital forge is always hot, and new creations are constantly in development. Stay tuned for updates as I continue to expand my portfolio and push the boundaries of what's possible.</p>
-        </div>
-        
-        <footer>
             <div class="social-links">
-                <a href="https://www.instagram.com/mcboss120/" class="social-link" target="_blank">
+                <a href="https://www.instagram.com/mcboss120/" target="_blank" class="social-link instagram">
                     <i class="fab fa-instagram"></i>
-                    <span class="username">mcboss120</span>
                 </a>
-                <a href="https://www.tiktok.com/@mcboss224" class="social-link" target="_blank">
+                <a href="https://www.tiktok.com/@mcboss224" target="_blank" class="social-link tiktok">
                     <i class="fab fa-tiktok"></i>
-                    <span class="username">mcboss224</span>
                 </a>
-                <a href="https://discordapp.com/users/1237079597124812862" class="social-link" target="_blank">
+                <a href="https://discordapp.com/users/1237079597124812862" target="_blank" class="social-link discord">
                     <i class="fab fa-discord"></i>
-                    <span class="username">McBoss</span>
                 </a>
             </div>
             
-            <a href="mailto:mcboss120@gmail.com" class="email-link">
-                <i class="fas fa-envelope"></i>
-                mcboss120@gmail.com
-            </a>
-            
-            <p style="margin-top: 20px;">© 2025 Miyuru "McBoss" Gunatilake | The Digital Saga Continues</p>
-        </footer>
+            <div class="last-updated" id="last-updated">Last updated: Never</div>
+        </div>
+
+        <div class="servers-container">
+            <h2 class="servers-title">
+                <i class="fas fa-server"></i>
+                Favorite Servers
+            </h2>
+            <div id="discord-servers" class="servers-grid">
+                <!-- Server cards will be dynamically inserted here -->
+            </div>
+            <div class="servers-loading" id="servers-loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i>
+                Loading servers...
+            </div>
+        </div>
     </div>
 
     <script>
-        // Matrix rain effect
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
+        const DISCORD_USER_ID = '1237079597124812862';
+        let isOnline = false;
         
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const code = katakana + latin + nums;
-        
-        const columns = canvas.width / 20;
-        const drops = [];
-        
-        for (let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
-        
-        function draw() {
-            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#9147ff';
-            ctx.font = '20px monospace';
-            
-            for (let i = 0; i < drops.length; i++) {
-                const text = code.charAt(Math.floor(Math.random() * code.length));
-                ctx.fillText(text, i * 20, drops[i] * 20);
-                
-                if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                
-                drops[i]++;
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
             }
         }
+
+        // Update connection status
+        function updateConnectionStatus(online) {
+            const statusEl = document.getElementById('connection-status');
+            if (online) {
+                statusEl.className = 'connection-status connection-online';
+                statusEl.innerHTML = '<i class="fas fa-circle"></i> LIVE';
+                isOnline = true;
+            } else {
+                statusEl.className = 'connection-status connection-offline';
+                statusEl.innerHTML = '<i class="fas fa-circle"></i> OFFLINE';
+                isOnline = false;
+            }
+        }
+
+        // Load Discord data using Lanyard API (real-time Discord presence)
+        async function loadDiscordData() {
+            const usernameEl = document.getElementById('discord-username');
+            const statusEl = document.getElementById('discord-status');
+            const avatarEl = document.getElementById('discord-avatar');
+            const statusIndicator = document.getElementById('status-indicator');
+            const activitiesContainer = document.getElementById('discord-activities');
+            const pageTitle = document.getElementById('page-title');
+            const lastUpdated = document.getElementById('last-updated');
+            const presenceStatusEl = document.getElementById('discord-presence-status');
+
+
+            try {
+                // Using Lanyard API for real Discord presence
+                const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch Discord data');
+                }
+                
+                const data = await response.json();
+                const discordUser = data.data;
+
+                updateConnectionStatus(true);
+
+                // Update username and page title
+                const displayName = discordUser.discord_user.display_name || discordUser.discord_user.username;
+                startTypingAnimation(displayName);
+                pageTitle.textContent = `${displayName} - Discord Profile`;
+                
+                // Update favicon with Discord avatar
+                const avatarUrl = discordUser.discord_user.avatar 
+                    ? `https://cdn.discordapp.com/avatars/${DISCORD_USER_ID}/${discordUser.discord_user.avatar}.png?size=128`
+                    : 'https://cdn.discordapp.com/embed/avatars/0.png';
+                avatarEl.src = avatarUrl;
+                
+                // Update favicon
+                updateFavicon(avatarUrl);
+                
+                // Update status indicator
+                const status = discordUser.discord_status; // online, idle, dnd, offline
+                statusIndicator.className = `status-indicator status-${status}`;
+                
+                // Handle custom status (only show if it exists and has content)
+                if (discordUser.activities) {
+                    const customStatus = discordUser.activities.find(act => act.type === 4); // Custom status
+                    
+                    if (customStatus && (customStatus.state || customStatus.emoji)) {
+                        let statusText = '';
+                        switch(status) {
+                            case 'online':
+                                statusText = '🟢 Online';
+                                presenceStatusEl.className = 'presence-status presence-online';
+                                break;
+                            case 'idle':
+                                statusText = '🟡 Away';
+                                presenceStatusEl.className = 'presence-status presence-idle';
+                                break;
+                            case 'dnd':
+                                statusText = '🔴 Do Not Disturb';
+                                presenceStatusEl.className = 'presence-status presence-dnd';
+                                break;
+                            case 'offline':
+                            default:
+                                statusText = '⚫ Offline';
+                                presenceStatusEl.className = 'presence-status presence-offline';
+                                break;
+                        }
+                        presenceStatusEl.textContent = statusText;
+
+                        
+                        if (customStatus.emoji) {
+                            // Handle emoji (could be custom or unicode)
+                            if (customStatus.emoji.id) {
+                                // Custom emoji
+                                statusText += `<img src="https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.png" alt="${customStatus.emoji.name}" style="width: 16px; height: 16px; vertical-align: middle;"> `;
+                            } else if (customStatus.emoji.name) {
+                                // Unicode emoji
+                                statusText += customStatus.emoji.name + ' ';
+                            }
+                        }
+                        
+                        if (customStatus.state) {
+                            statusText += customStatus.state;
+                        }
+                        
+                        if (statusText.trim()) {
+                            statusEl.innerHTML = statusText;
+                            statusEl.style.display = 'block';
+                        } else {
+                            statusEl.style.display = 'none';
+                        }
+                    } else {
+                        statusEl.style.display = 'none';
+                    }
+                } else {
+                    statusEl.style.display = 'none';
+                }
+                
+                // Handle ALL activities with FULL details
+                if (discordUser.activities && discordUser.activities.length > 0) {
+                    const activities = discordUser.activities.filter(act => act.type !== 4); // Exclude custom status
+                    
+                    if (activities.length > 0) {
+                        activitiesContainer.innerHTML = '';
+                        activitiesContainer.style.display = 'block';
+                        
+                        activities.forEach((activity, index) => {
+                            const activityDiv = createActivityElement(activity, discordUser);
+                            if (activityDiv) {
+                                activitiesContainer.appendChild(activityDiv);
+                            }
+                        });
+                    } else {
+                        activitiesContainer.style.display = 'none';
+                    }
+                } else {
+                    activitiesContainer.style.display = 'none';
+                }
+
+                // Update last updated time
+                lastUpdated.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+                
+            } catch (error) {
+                console.error('Error fetching Discord data:', error);
+                updateConnectionStatus(false);
+                
+                // Fallback to default data
+                usernameEl.textContent = 'MCBoss';
+                pageTitle.textContent = 'MCBoss - Discord Profile';
+                statusEl.style.display = 'none';
+                activitiesContainer.style.display = 'none';
+                
+                // Keep default avatar
+                avatarEl.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+                statusIndicator.className = 'status-indicator status-offline';
+                
+                lastUpdated.textContent = `Last updated: Failed to connect`;
+            }
+        }
+
+        // Create detailed activity element
+        function createActivityElement(activity, discordUser) {
+            const activityDiv = document.createElement('div');
+            let activityClass = 'activity';
+            let activityContent = '';
+            
+            // Get current timestamp
+            const now = Date.now();
+            
+            switch (activity.type) {
+                case 0: // Playing/Gaming
+                    activityClass += ' activity-game';
+                    activityContent = createGameActivity(activity, now);
+                    break;
+                case 1: // Streaming
+                    activityClass += ' activity-streaming';
+                    activityContent = createStreamingActivity(activity, now);
+                    break;
+                case 2: // Listening
+                    // Check if it's actually Spotify or just generic listening
+                    if (activity.name && activity.name.toLowerCase() === 'spotify') {
+                        activityClass += ' activity-spotify';
+                        activityContent = createSpotifyActivity(activity, now, discordUser);
+                    } else {
+                        // Generic listening activity (not Spotify)
+                        activityClass += ' activity-listening';
+                        activityContent = createListeningActivity(activity, now);
+                    }
+                    break;
+                case 3: // Watching
+                    activityClass += ' activity-watching';
+                    activityContent = createWatchingActivity(activity, now);
+                    break;
+                case 5: // Competing
+                    activityClass += ' activity-game';
+                    activityContent = createCompetingActivity(activity, now);
+                    break;
+                default:
+                    return null;
+            }
+            
+            activityDiv.className = activityClass;
+            activityDiv.innerHTML = activityContent;
+            return activityDiv;
+        }
+
+        // Store activity data when creating elements
+function createSpotifyActivity(activity, now, discordUser) {
+    const song = activity.details || 'Unknown Song';
+    const artist = activity.state || 'Unknown Artist';
+    const album = activity.assets?.large_text || 'Unknown Album';
+
+    // Fix Spotify image URL handling
+    let albumArt = null;
+    if (activity.assets?.large_image) {
+        const imageId = activity.assets.large_image;
+        if (imageId.startsWith('spotify:')) {
+            albumArt = `https://i.scdn.co/image/${imageId.replace('spotify:', '')}`;
+        } else if (imageId.startsWith('mp:external')) {
+            const encodedUrl = imageId.replace('mp:external/', '');
+            try {
+                albumArt = decodeURIComponent(encodedUrl);
+            } catch (e) {
+                albumArt = null;
+            }
+        } else {
+            albumArt = `https://cdn.discordapp.com/app-assets/${activity.application_id || 'spotify'}/${imageId}.png`;
+        }
+    }
+    
+    // Calculate initial progress
+    let progressHtml = '';
+    const activityId = `activity-${Date.now()}-${Math.random()}`;
+    
+    if (activity.timestamps) {
+        const start = activity.timestamps.start;
+        const end = activity.timestamps.end;
+        if (start && end) {
+            const duration = end - start;
+            const elapsed = now - start;
+            const progress = Math.min(Math.max((elapsed / duration) * 100, 0), 100);
         
-        setInterval(draw, 35);
+            const elapsedMin = Math.floor(Math.max(elapsed, 0) / 60000);
+            const elapsedSec = Math.floor((Math.max(elapsed, 0) % 60000) / 1000);
+            const totalMin = Math.floor(duration / 60000);
+            const totalSec = Math.floor((duration % 60000) / 1000);
         
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            progressHtml = `
+                <div class="music-progress-container" data-activity-id="${activityId}">
+                    <span class="progress-time current-time">${elapsedMin}:${elapsedSec.toString().padStart(2, '0')}</span>
+                    <div class="music-progress-bar">
+                        <div class="progress-track"></div>
+                        <div class="progress-fill" style="width: ${progress}%"></div>
+                        <div class="progress-handle" style="left: ${progress}%">▶</div>
+                    </div>
+                    <span class="progress-time total-time">${totalMin}:${totalSec.toString().padStart(2, '0')}</span>
+                </div>
+            `;
+            
+            // Store the activity data for real-time updates
+            activeProgressUpdates.set(activityId, {
+                start: start,
+                end: end,
+                duration: duration
+            });
+        }
+    }
+    
+    const content = `
+        <div class="${albumArt ? 'activity-with-image' : ''}" data-activity-id="${activityId}">
+            ${albumArt ? `<img src="${albumArt}" alt="Album Art" class="activity-image" onerror="this.style.display='none'">` : ''}
+            <div class="activity-content">
+                <div class="activity-header">
+                    <i class="fab fa-spotify activity-icon" style="color: #1db954;"></i>
+                    <span class="activity-title">Listening to Spotify</span>
+                </div>
+                <div class="activity-details">
+                    <strong>🎵 ${song}</strong><br>
+                    👤 by ${artist}<br>
+                    💿 on ${album}
+                </div>
+                ${progressHtml}
+            </div>
+        </div>
+    `;
+    
+    return content;
+    
+        return `
+        <div class="${albumArt ? 'activity-with-image' : ''}">
+            ${albumArt ? `<img src="${albumArt}" alt="Album Art" class="activity-image" onerror="this.style.display='none'">` : ''}
+            <div class="activity-content">
+                <div class="activity-header">
+                    <i class="fab fa-spotify activity-icon" style="color: #1db954;"></i>
+                    <span class="activity-title">Listening to Spotify</span>
+                </div>
+                <div class="activity-details">
+                    <strong>🎵 ${song}</strong><br>
+                    👤 by ${artist}<br>
+                    💿 on ${album}
+                </div>
+                ${progressHtml}
+            </div>
+        </div>
+    `;
+}
+
+
+        function createListeningActivity(activity, now) {
+    const artist = activity.name || 'Unknown Artist';
+    const song = activity.details || 'Unknown Song';
+    const album = activity.state || '';
+
+    // Try to get image
+    let imageUrl = null;
+    if (activity.assets?.large_image) {
+        const imageId = activity.assets.large_image;
+        if (imageId.startsWith('mp:')) {
+            imageUrl = `https://media.discordapp.net/${imageId.replace('mp:', '')}`;
+        } else {
+            imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageId}.png`;
+        }
+    }
+
+    // Create live progress bar for any music with timestamps
+    let progressHtml = '';
+    if (activity.timestamps) {
+        const start = activity.timestamps.start;
+        const end = activity.timestamps.end;
+        
+        if (start && end) {
+            // Has both start and end - show progress bar
+            const duration = end - start;
+            const elapsed = now - start;
+            const progress = Math.min((elapsed / duration) * 100, 100);
+        
+            const elapsedMin = Math.floor(elapsed / 60000);
+            const elapsedSec = Math.floor((elapsed % 60000) / 1000);
+            const totalMin = Math.floor(duration / 60000);
+            const totalSec = Math.floor((duration % 60000) / 1000);
+        
+            progressHtml = `
+                <div class="music-progress-container">
+                    <span class="progress-time">${elapsedMin}:${elapsedSec.toString().padStart(2, '0')}</span>
+                    <div class="music-progress-bar">
+                        <div class="progress-track"></div>
+                        <div class="progress-fill" style="width: ${progress}%"></div>
+                        <div class="progress-handle" style="left: ${progress}%">➲</div>
+                    </div>
+                    <span class="progress-time">${totalMin}:${totalSec.toString().padStart(2, '0')}</span>
+                </div>
+            `;
+        } else if (start) {
+            // Only has start time - show elapsed time
+            const elapsed = now - start;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            progressHtml = `<div class="activity-timestamp">🎵 Listening for ${minutes}:${seconds.toString().padStart(2, '0')}</div>`;
+        }
+    }
+
+    return `
+        <div class="${imageUrl ? 'activity-with-image' : ''}">
+            ${imageUrl ? `<img src="${imageUrl}" alt="Album Art" class="activity-image" onerror="this.style.display='none'">` : ''}
+            <div class="activity-content">
+                <div class="activity-header">
+                    <i class="fas fa-music activity-icon" style="color: #1db954;"></i>
+                    <span class="activity-title">Listening to ${artist}</span>
+                </div>
+                <div class="activity-details">
+                    ${song ? `<strong>🎵 ${song}</strong><br>` : ''}
+                    ${album ? `💿 ${album}` : ''}
+                </div>
+                ${progressHtml}
+            </div>
+        </div>
+    `;
+}
+
+        // Create game activity with FULL details
+        function createGameActivity(activity, now) {
+            const gameName = activity.name || 'Unknown Game';
+            const details = activity.details || '';
+            const state = activity.state || '';
+            const largeImage = activity.assets?.large_image;
+            const smallImage = activity.assets?.small_image;
+            const largeText = activity.assets?.large_text || '';
+            const smallText = activity.assets?.small_text || '';
+            
+            let gameImageUrl = null;
+            if (largeImage) {
+                if (largeImage.startsWith('mp:')) {
+                    gameImageUrl = `https://media.discordapp.net/${largeImage.replace('mp:', '')}`;
+                } else {
+                    gameImageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${largeImage}.png`;
+                }
+            }
+            
+            // Calculate time played
+            let timeHtml = '';
+            if (activity.timestamps?.start) {
+                const elapsed = now - activity.timestamps.start;
+                const hours = Math.floor(elapsed / 3600000);
+                const minutes = Math.floor((elapsed % 3600000) / 60000);
+                const seconds = Math.floor((elapsed % 60000) / 1000);
+                
+                if (hours > 0) {
+                    timeHtml = `<div class="activity-timestamp">⏱️ Playing for ${hours}h ${minutes}m</div>`;
+                } else if (minutes > 0) {
+                    timeHtml = `<div class="activity-timestamp">⏱️ Playing for ${minutes}m ${seconds}s</div>`;
+                } else {
+                    timeHtml = `<div class="activity-timestamp">⏱️ Playing for ${seconds}s</div>`;
+                }
+            }
+            
+            return `
+                <div class="${gameImageUrl ? 'activity-with-image' : ''}">
+                    ${gameImageUrl ? `<img src="${gameImageUrl}" alt="Game Icon" class="activity-image">` : ''}
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <i class="fas fa-gamepad activity-icon" style="color: #7289da;"></i>
+                            <span class="activity-title">Playing ${gameName}</span>
+                        </div>
+                        <div class="activity-details">
+                            ${details ? `📝 ${details}<br>` : ''}
+                            ${state ? `🎯 ${state}<br>` : ''}
+                            ${largeText ? `🖼️ ${largeText}` : ''}
+                        </div>
+                        ${timeHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create streaming activity
+        function createStreamingActivity(activity, now) {
+            const streamTitle = activity.details || 'Live Stream';
+            const streamGame = activity.state || '';
+            const streamUrl = activity.url || '#';
+            
+            let timeHtml = '';
+            if (activity.timestamps?.start) {
+                const elapsed = now - activity.timestamps.start;
+                const hours = Math.floor(elapsed / 3600000);
+                const minutes = Math.floor((elapsed % 3600000) / 60000);
+                
+                timeHtml = `<div class="activity-timestamp">🔴 Live for ${hours > 0 ? hours + 'h ' : ''}${minutes}m</div>`;
+            }
+            
+            return `
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <i class="fas fa-video activity-icon" style="color: #9146ff;"></i>
+                        <span class="activity-title">Streaming on Twitch</span>
+                    </div>
+                    <div class="activity-details">
+                        📺 ${streamTitle}<br>
+                        ${streamGame ? `🎮 ${streamGame}<br>` : ''}
+                        🔗 <a href="${streamUrl}" target="_blank" style="color: #9146ff;">Watch Stream</a>
+                    </div>
+                    ${timeHtml}
+                </div>
+            `;
+        }
+
+        // Create watching activity
+        function createWatchingActivity(activity, now) {
+            const showName = activity.name || 'Unknown Show';
+            const episode = activity.details || '';
+            const season = activity.state || '';
+            
+            let timeHtml = '';
+            if (activity.timestamps?.start) {
+                const elapsed = now - activity.timestamps.start;
+                const minutes = Math.floor(elapsed / 60000);
+                const seconds = Math.floor((elapsed % 60000) / 1000);
+                
+                timeHtml = `<div class="activity-timestamp">👀 Watching for ${minutes}m ${seconds}s</div>`;
+            }
+            
+            return `
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <i class="fas fa-tv activity-icon" style="color: #f04747;"></i>
+                        <span class="activity-title">Watching ${showName}</span>
+                    </div>
+                    <div class="activity-details">
+                        ${episode ? `📺 ${episode}<br>` : ''}
+                        ${season ? `📅 ${season}` : ''}
+                    </div>
+                    ${timeHtml}
+                </div>
+            `;
+        }
+
+        // Create competing activity
+        function createCompetingActivity(activity, now) {
+            const competitionName = activity.name || 'Unknown Competition';
+            const details = activity.details || '';
+            
+            return `
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <i class="fas fa-trophy activity-icon" style="color: #faa61a;"></i>
+                        <span class="activity-title">Competing in ${competitionName}</span>
+                    </div>
+                    <div class="activity-details">
+                        ${details ? `🏆 ${details}` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Update favicon with Discord avatar
+        function updateFavicon(avatarUrl) {
+            let favicon = document.querySelector('link[rel="icon"]');
+            if (!favicon) {
+                favicon = document.createElement('link');
+                favicon.rel = 'icon';
+                document.head.appendChild(favicon);
+            }
+            favicon.href = avatarUrl;
+        }
+
+        // Add hover effects to social links
+        function addHoverEffects() {
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    link.style.transform = 'translateY(-5px) scale(1.1) rotate(5deg)';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    link.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+                });
+            });
+        }
+
+        // Add click effects
+        function addClickEffects() {
+            const container = document.querySelector('.profile-container');
+            container.addEventListener('click', (e) => {
+                if (e.target.closest('.social-link')) return;
+                
+                const ripple = document.createElement('div');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(88, 101, 242, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.left = (e.clientX - container.offsetLeft) + 'px';
+                ripple.style.top = (e.clientY - container.offsetTop) + 'px';
+                
+                container.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        }
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize everything and set up auto-refresh
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            loadDiscordData();
+            addHoverEffects();
+            addClickEffects();
+            
+            // Refresh Discord data every 30 seconds for real-time updates
+            setInterval(loadDiscordData, 30000);
         });
+
+        // Add some interactive elements
+        setInterval(() => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                if (Math.random() < 0.1) {
+                    particle.style.background = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.6)`;
+                    setTimeout(() => {
+                        particle.style.background = 'rgba(88, 101, 242, 0.6)';
+                    }, 1000);
+                }
+            });
+        }, 3000);
+
+
+// Store active progress updates
+const activeProgressUpdates = new Map();
+
+// Add this function to update progress bars in real-time
+function updateMusicProgress() {
+    const now = Date.now();
+    
+    activeProgressUpdates.forEach((data, activityId) => {
+        const container = document.querySelector(`[data-activity-id="${activityId}"]`);
+        if (!container) {
+            // Clean up if element no longer exists
+            activeProgressUpdates.delete(activityId);
+            return;
+        }
+        
+        const progressContainer = container.querySelector('.music-progress-container');
+        if (!progressContainer) return;
+        
+        const { start, end, duration } = data;
+        const elapsed = now - start;
+        const progress = Math.min(Math.max((elapsed / duration) * 100, 0), 100);
+        
+        const elapsedMin = Math.floor(Math.max(elapsed, 0) / 60000);
+        const elapsedSec = Math.floor((Math.max(elapsed, 0) % 60000) / 1000);
+        
+        // Update progress bar
+        const progressFill = progressContainer.querySelector('.progress-fill');
+        const progressHandle = progressContainer.querySelector('.progress-handle');
+        const currentTime = progressContainer.querySelector('.current-time');
+        
+        if (progressFill) progressFill.style.width = progress + '%';
+        if (progressHandle) progressHandle.style.left = progress + '%';
+        if (currentTime) currentTime.textContent = `${elapsedMin}:${elapsedSec.toString().padStart(2, '0')}`;
+    });
+}
+
+// Start real-time progress updates
+setInterval(updateMusicProgress, 1000);
+
+
+function startTypingAnimation(fullText) {
+    const usernameEl = document.getElementById('discord-username');
+    let i = 0;
+    let typing = true;
+
+    function type() {
+        if (typing) {
+            if (i <= fullText.length) {
+                usernameEl.textContent = fullText.slice(0, i);
+                i++;
+            } else {
+                typing = false;
+                setTimeout(type, 1000);
+                return;
+            }
+        } else {
+            if (i >= 0) {
+                usernameEl.textContent = fullText.slice(0, i);
+                i--;
+            } else {
+                typing = true;
+                setTimeout(type, 1000);
+                return;
+            }
+        }
+        setTimeout(type, 150);
+    }
+
+    type();
+}
+
+// Server list configuration - ADD YOUR SERVER INVITES HERE
+const favoriteServers = [
+    {
+        invite: 'BbkVngNWSS', // Server invite code (from discord.gg/INVITE_CODE)
+        customName: null // Optional: Custom name override (null = use server name)
+    },
+    {
+        invite: 'W4ePrmkNjk',
+        customName: null
+    },
+    {
+        invite: 'n7SFbAMGMg',
+        customName: null
+    },
+    {
+        invite: 'bvvsScduxQ',
+        customName: null
+    }
+    // Add more servers here...
+];
+
+// Discord API base URL
+const DISCORD_API_BASE = 'https://discord.com/api/v10';
+
+// Load server data from Discord API
+async function loadServerData(inviteCode) {
+    try {
+        const response = await fetch(`${DISCORD_API_BASE}/invites/${inviteCode}?with_counts=true&with_expiration=true`);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch server data: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Error loading server ${inviteCode}:`, error);
+        return null;
+    }
+}
+
+// Create server card HTML
+function createServerCard(serverData, inviteCode, customName) {
+    const guild = serverData.guild;
+    const memberCount = serverData.approximate_member_count || 0;
+    const onlineCount = serverData.approximate_presence_count || 0;
+    
+    const serverName = customName || guild.name;
+    const iconUrl = guild.icon 
+        ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128`
+        : 'https://cdn.discordapp.com/embed/avatars/0.png';
+    
+    const bannerUrl = guild.banner 
+        ? `https://cdn.discordapp.com/banners/${guild.id}/${guild.banner}.png?size=480`
+        : null;
+    
+    const bannerStyle = bannerUrl 
+        ? `background-image: url('${bannerUrl}');` 
+        : '';
+    
+    return `
+        <div class="server-card">
+            <div class="server-banner" style="${bannerStyle}"></div>
+            <div class="server-info">
+                <img src="${iconUrl}" alt="${serverName}" class="server-icon" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+                <div class="server-details">
+                    <div class="server-name">${serverName}</div>
+                    <div class="server-stats">
+                        <div class="server-stat stat-members">
+                            <i class="fas fa-users"></i>
+                            ${memberCount.toLocaleString()} Members
+                        </div>
+                        <div class="server-stat stat-online">
+                            <i class="fas fa-circle"></i>
+                            ${onlineCount.toLocaleString()} Online
+                        </div>
+                    </div>
+                    <a href="https://discord.gg/${inviteCode}" target="_blank" class="join-button">
+                        <i class="fab fa-discord"></i>
+                        Join Server
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Load all favorite servers
+async function loadFavoriteServers() {
+    const serversContainer = document.getElementById('discord-servers');
+    const loadingElement = document.getElementById('servers-loading');
+    
+    if (!serversContainer) return;
+    
+    // Show loading
+    loadingElement.style.display = 'block';
+    serversContainer.innerHTML = '';
+    
+    try {
+        // Load servers in parallel
+        const serverPromises = favoriteServers.map(async (server) => {
+            const serverData = await loadServerData(server.invite);
+            return { serverData, invite: server.invite, customName: server.customName };
+        });
+        
+        const results = await Promise.all(serverPromises);
+        
+        // Hide loading
+        loadingElement.style.display = 'none';
+        
+        // Create server cards
+        results.forEach((result, index) => {
+            if (result.serverData) {
+                const cardHtml = createServerCard(result.serverData, result.invite, result.customName);
+                serversContainer.innerHTML += cardHtml;
+            } else {
+                // Show error card for failed servers
+                serversContainer.innerHTML += `
+                    <div class="server-card">
+                        <div class="server-error">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Failed to load server: ${result.invite}
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        
+        if (serversContainer.innerHTML === '') {
+            serversContainer.innerHTML = `
+                <div class="server-error">
+                    No servers configured. Add server invites to the favoriteServers array.
+                </div>
+            `;
+        }
+        
+    } catch (error) {
+        console.error('Error loading favorite servers:', error);
+        loadingElement.style.display = 'none';
+        serversContainer.innerHTML = `
+            <div class="server-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                Error loading servers. Please try again later.
+            </div>
+        `;
+    }
+}
+
+// Initialize servers when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Load servers after a short delay
+    setTimeout(loadFavoriteServers, 1000);
+});
+
+// Refresh servers every 5 minutes
+setInterval(loadFavoriteServers, 300000);
     </script>
 </body>
 </html>
