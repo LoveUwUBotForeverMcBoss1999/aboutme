@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Loading... - Discord Profile</title>
+
+    <!-- Basic Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Loading Discord Profile...</title>
+    <meta name="description" content="Live Discord profile powered by the Lanyard API. See what I'm doing right now!" />
+     
+    <!-- Open Graph Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Loading Discord Profile..." id="og-title" />
+    <meta property="og:description" content="See my real-time Discord status, servers, and activity." />
+    <meta property="og:image" content="https://cdn.discordapp.com/embed/avatars/0.png" id="og-image" />
+    <meta property="og:url" content="https://yourdomain.com" />
+      
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Loading Discord Profile..." id="twitter-title" />
+    <meta name="twitter:description" content="See what I'm up to on Discord in real-time." />
+    <meta name="twitter:image" content="https://cdn.discordapp.com/embed/avatars/0.png" id="twitter-image" />
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -1673,6 +1694,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Refresh servers every 5 minutes
 setInterval(loadFavoriteServers, 300000);
-    </script>
+
+async function updateMetaPreview() {
+    try {
+      const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
+      if (!res.ok) throw new Error("API error");
+      const data = await res.json();
+      const user = data.data.discord_user;
+      const name = user.display_name || user.username;
+      const avatar = user.avatar
+        ? `https://cdn.discordapp.com/avatars/${DISCORD_USER_ID}/${user.avatar}.png?size=512`
+        : "https://cdn.discordapp.com/embed/avatars/0.png";
+
+      // Update title and OG/Twitter meta
+      document.title = `${name} - Discord Profile`;
+      document.getElementById("page-title").textContent = `${name} - Discord Profile`;
+
+      document.getElementById("og-title").setAttribute("content", `${name} - Discord Profile`);
+      document.getElementById("twitter-title").setAttribute("content", `${name} - Discord Profile`);
+      document.getElementById("og-image").setAttribute("content", avatar);
+      document.getElementById("twitter-image").setAttribute("content", avatar);
+    } catch (err) {
+      console.error("Meta preview failed:", err);
+    }
+  }
+
+  updateMetaPreview();
+
+</script>
 </body>
 </html>
