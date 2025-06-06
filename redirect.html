@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 20, 20, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(50, 50, 150, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(20,20,35,0.9) 50%, rgba(0,0,0,0.95) 100%);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0,0,0,0.8);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            animation: slideIn 0.8s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #aaaaaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #B9BBBE;
+            margin-bottom: 2rem;
+        }
+        .countdown {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+            animation: countPulse 1s infinite;
+        }
+        @keyframes countPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .progress-bar {
+            width: 300px;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin: 2rem auto;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #444, #777, #444);
+            border-radius: 3px;
+            animation: progress 5s linear;
+        }
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        .ash {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 4s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-20px) scale(0.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon" id="social-icon"></div>
+        <div class="title">Redirecting to</div>
+        <div class="subtitle" id="destination"></div>
+        <div class="countdown" id="countdown">5</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const site = params.get('site') || 'Unknown';
+        const username = params.get('username') || '';
+        const url = params.get('url') || '/';
+        const icon = params.get('icon') || '';
+
+        document.getElementById('destination').textContent = `${site} ${username}`;
+        document.getElementById('social-icon').innerHTML = icon;
+
+        let count = 5;
+        const countdownEl = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            count--;
+            countdownEl.textContent = count;
+            if (count <= 0) {
+                clearInterval(timer);
+                window.location.href = url;
+            }
+        }, 1000);
+
+        // Create floating ash particles
+        setInterval(() => {
+            const ash = document.createElement('div');
+            ash.className = 'ash';
+            ash.style.left = Math.random() * 100 + 'vw';
+            ash.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(ash);
+            setTimeout(() => ash.remove(), 4000);
+        }, 200);
+    </script>
+</body>
+</html>
