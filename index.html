@@ -791,143 +791,151 @@
         }
 
         function createActivityTile(activity) {
-            const tile = document.createElement('div');
-            tile.className = 'activity-tile';
-            
-            let tileClass = 'game-tile';
-            let activityType = 'Playing';
-            
-            if (activity.name === 'Spotify') {
-                tileClass = 'spotify-tile';
-                activityType = 'Listening to Spotify';
-            } else if (activity.type === 2) { // Listening
-                tileClass = 'music-tile';
-                activityType = `Listening to ${activity.name}`;
-            } else if (activity.type === 0) { // Playing
-                activityType = 'Playing';
-            } else if (activity.type === 3) { // Watching
-                activityType = 'Watching';
-            }
-            
-            tile.classList.add(tileClass);
-            
-            // Get large image
-            let imageHtml = '';
-            if (activity.assets && activity.assets.large_image) {
-                let imageUrl = activity.assets.large_image;
-                if (imageUrl.startsWith('spotify:')) {
-                    imageUrl = `https://i.scdn.co/image/${imageUrl.slice(8)}`;
-                } else if (imageUrl.startsWith('mp:')) {
-                    imageUrl = `https://media.discordapp.net/${imageUrl.slice(3)}`;
-                } else if (!imageUrl.startsWith('http')) {
-                    imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.png`;
-                }
-                imageHtml = `<img src="${imageUrl}" alt="${activity.name}" class="large-image">`;
-            } else {
-                // Use rocket image for activities without logos
-                imageHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="${activity.name}" class="large-image">`;
-            }
-            
-            // Get small icon
-            let iconHtml = '';
-            if (activity.assets && activity.assets.small_image) {
-                let iconUrl = activity.assets.small_image;
-                if (iconUrl.startsWith('mp:')) {
-                    iconUrl = `https://media.discordapp.net/${iconUrl.slice(3)}`;
-                } else if (!iconUrl.startsWith('http')) {
-                    iconUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${iconUrl}.png`;
-                }
-                iconHtml = `<img src="${iconUrl}" alt="" class="activity-icon">`;
-            } else {
-                // Use rocket image for activities without icons
-                iconHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="" class="activity-icon">`;
-            }
-            
-            // Calculate playtime for games
-            let playtimeHtml = '';
-            if (activity.timestamps && activity.timestamps.start && activity.type === 0) {
-                const now = Date.now();
-                const elapsed = now - activity.timestamps.start;
-                playtimeHtml = `<div class="playtime">Time: ${formatTime(elapsed)}</div>`;
-                
-                // Update playtime in real-time
-                setInterval(() => {
-                    const newNow = Date.now();
-                    const newElapsed = newNow - activity.timestamps.start;
-                    const playtimeElement = tile.querySelector('.playtime');
-                    if (playtimeElement) {
-                        playtimeElement.innerHTML = `Time: ${formatTime(newElapsed)}`;
-                    }
-                }, 1000);
-            }
-            
-            // Progress bar for music
-            let progressHtml = '';
-            if (activity.timestamps && activity.timestamps.start && activity.timestamps.end) {
-                const now = Date.now();
-                const start = activity.timestamps.start;
-                const end = activity.timestamps.end;
-                const duration = end - start;
-                const elapsed = now - start;
-                const progress = Math.max(0, Math.min(100, (elapsed / duration) * 100));
-                
-                progressHtml = `
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${progress}%"></div>
-                    </div>
-                    <div class="progress-time">
-                        <span>${formatTime(elapsed)}</span>
-                        <span>${formatTime(duration)}</span>
-                    </div>
-                `;
-                
-                // Update progress in real-time
-                if (progressInterval) clearInterval(progressInterval);
-                progressInterval = setInterval(() => {
-                    const newNow = Date.now();
-                    const newElapsed = newNow - start;
-                    const newProgress = Math.max(0, Math.min(100, (newElapsed / duration) * 100));
-                    
-                    const progressFill = tile.querySelector('.progress-fill');
-                    const timeSpan = tile.querySelector('.progress-time span:first-child');
-                    
-                    if (progressFill && timeSpan) {
-                        progressFill.style.width = `${newProgress}%`;
-                        timeSpan.textContent = formatTime(newElapsed);
-                    }
-                    
-                    if (newElapsed >= duration) {
-                        clearInterval(progressInterval);
-                    }
-                }, 1000);
-            }
-            
-            // Build additional info
-            let additionalInfo = '';
-            if (activity.details) {
-                additionalInfo += `<div class="activity-details">Details: ${activity.details}</div>`;
-            }
-            if (activity.state) {
-                additionalInfo += `<div class="activity-details">State: ${activity.state}</div>`;
-            }
-            if (activity.party && activity.party.size) {
-                additionalInfo += `<div class="activity-details">Players: ${activity.party.size[0]} of ${activity.party.size[1]}</div>`;
-            }
-            
-            tile.innerHTML = `
-                <div class="activity-header">
-                    ${iconHtml}
-                    <div class="activity-type">${activityType}</div>
-                </div>
-                ${imageHtml}
-                <div class="activity-name">${activity.name}</div>
-                ${additionalInfo}
-                ${playtimeHtml}
-                ${progressHtml}
-            `;
-            
-            return tile;
-        }
+				const tile = document.createElement('div');
+				tile.className = 'activity-tile';
+
+				let tileClass = 'game-tile';
+				let activityType = 'Playing';
+
+				if (activity.name === 'Spotify') {
+					tileClass = 'spotify-tile';
+					activityType = 'Listening to Spotify';
+				} else if (activity.type === 2) { // Listening
+					tileClass = 'music-tile';
+					activityType = `Listening to ${activity.name}`;
+				} else if (activity.type === 0) { // Playing
+					activityType = 'Playing';
+				} else if (activity.type === 3) { // Watching
+					activityType = 'Watching';
+				}
+
+				tile.classList.add(tileClass);
+
+				// Get large image - FIXED VERSION
+				let imageHtml = '';
+				if (activity.assets && activity.assets.large_image) {
+					let imageUrl = activity.assets.large_image;
+					if (imageUrl.startsWith('spotify:')) {
+						imageUrl = `https://i.scdn.co/image/${imageUrl.slice(8)}`;
+					} else if (imageUrl.startsWith('mp:')) {
+						imageUrl = `https://media.discordapp.net/${imageUrl.slice(3)}`;
+					} else if (imageUrl.startsWith('https://') || imageUrl.startsWith('http://')) {
+						imageUrl = imageUrl;
+					} else if (activity.application_id) {
+						imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.png`;
+					} else {
+						imageUrl = "https://cdn3.emoji.gg/emojis/8869-rocket.png";
+					}
+
+					imageHtml = `<img src="${imageUrl}" alt="${activity.name}" class="large-image" onerror="this.src='https://cdn3.emoji.gg/emojis/8869-rocket.png';">`;
+				} else {
+					imageHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="${activity.name}" class="large-image">`;
+				}
+
+				// Get small icon - FIXED VERSION
+				let iconHtml = '';
+				if (activity.assets && activity.assets.small_image) {
+					let iconUrl = activity.assets.small_image;
+					if (iconUrl.startsWith('spotify:')) {
+						iconUrl = `https://i.scdn.co/image/${iconUrl.slice(8)}`;
+					} else if (iconUrl.startsWith('mp:')) {
+						iconUrl = `https://media.discordapp.net/${iconUrl.slice(3)}`;
+					} else if (iconUrl.startsWith('https://') || iconUrl.startsWith('http://')) {
+						iconUrl = iconUrl;
+					} else if (activity.application_id) {
+						iconUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${iconUrl}.png`;
+					} else {
+						iconUrl = "https://cdn3.emoji.gg/emojis/8869-rocket.png";
+					}
+
+					iconHtml = `<img src="${iconUrl}" alt="" class="activity-icon" onerror="this.src='https://cdn3.emoji.gg/emojis/8869-rocket.png';">`;
+				} else {
+					iconHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="" class="activity-icon">`;
+				}
+
+				// Calculate playtime for games
+				let playtimeHtml = '';
+				if (activity.timestamps && activity.timestamps.start && activity.type === 0) {
+					const now = Date.now();
+					const elapsed = now - activity.timestamps.start;
+					playtimeHtml = `<div class="playtime">Time: ${formatTime(elapsed)}</div>`;
+
+					setInterval(() => {
+						const newNow = Date.now();
+						const newElapsed = newNow - activity.timestamps.start;
+						const playtimeElement = tile.querySelector('.playtime');
+						if (playtimeElement) {
+							playtimeElement.innerHTML = `Time: ${formatTime(newElapsed)}`;
+						}
+					}, 1000);
+				}
+
+				// Progress bar for music
+				let progressHtml = '';
+				if (activity.timestamps && activity.timestamps.start && activity.timestamps.end) {
+					const now = Date.now();
+					const start = activity.timestamps.start;
+					const end = activity.timestamps.end;
+					const duration = end - start;
+					const elapsed = now - start;
+					const progress = Math.max(0, Math.min(100, (elapsed / duration) * 100));
+
+					progressHtml = `
+						<div class="progress-bar">
+							<div class="progress-fill" style="width: ${progress}%"></div>
+						</div>
+						<div class="progress-time">
+							<span>${formatTime(elapsed)}</span>
+							<span>${formatTime(duration)}</span>
+						</div>
+					`;
+
+					if (progressInterval) clearInterval(progressInterval);
+					progressInterval = setInterval(() => {
+						const newNow = Date.now();
+						const newElapsed = newNow - start;
+						const newProgress = Math.max(0, Math.min(100, (newElapsed / duration) * 100));
+
+						const progressFill = tile.querySelector('.progress-fill');
+						const timeSpan = tile.querySelector('.progress-time span:first-child');
+
+						if (progressFill && timeSpan) {
+							progressFill.style.width = `${newProgress}%`;
+							timeSpan.textContent = formatTime(newElapsed);
+						}
+
+						if (newElapsed >= duration) {
+							clearInterval(progressInterval);
+						}
+					}, 1000);
+				}
+
+				// Build additional info
+				let additionalInfo = '';
+				if (activity.details) {
+					additionalInfo += `<div class="activity-details">Details: ${activity.details}</div>`;
+				}
+				if (activity.state) {
+					additionalInfo += `<div class="activity-details">State: ${activity.state}</div>`;
+				}
+				if (activity.party && activity.party.size) {
+					additionalInfo += `<div class="activity-details">Players: ${activity.party.size[0]} of ${activity.party.size[1]}</div>`;
+				}
+
+				tile.innerHTML = `
+					<div class="activity-header">
+						${iconHtml}
+						<div class="activity-type">${activityType}</div>
+					</div>
+					${imageHtml}
+					<div class="activity-name">${activity.name}</div>
+					${additionalInfo}
+					${playtimeHtml}
+					${progressHtml}
+				`;
+
+				return tile;
+			}
 
         function formatTime(ms) {
             const totalSeconds = Math.floor(ms / 1000);
