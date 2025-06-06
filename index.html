@@ -790,19 +790,7 @@
             container.appendChild(activitiesGrid);
         }
 
-                function createActivityTile(activity) {
-            // DEBUG: Log the entire activity object to see what we're working with
-            console.log('=== ACTIVITY DEBUG ===');
-            console.log('Full activity object:', activity);
-            console.log('Activity name:', activity.name);
-            console.log('Application ID:', activity.application_id);
-            console.log('Assets:', activity.assets);
-            if (activity.assets) {
-                console.log('Large image:', activity.assets.large_image);
-                console.log('Small image:', activity.assets.small_image);
-            }
-            console.log('=====================');
-
+        function createActivityTile(activity) {
             const tile = document.createElement('div');
             tile.className = 'activity-tile';
             
@@ -823,103 +811,35 @@
             
             tile.classList.add(tileClass);
             
-            // Get large image - ENHANCED DEBUG VERSION
+            // Get large image
             let imageHtml = '';
             if (activity.assets && activity.assets.large_image) {
                 let imageUrl = activity.assets.large_image;
-                console.log('Original large image URL:', imageUrl);
-                
                 if (imageUrl.startsWith('spotify:')) {
                     imageUrl = `https://i.scdn.co/image/${imageUrl.slice(8)}`;
-                    console.log('Spotify image URL:', imageUrl);
                 } else if (imageUrl.startsWith('mp:')) {
                     imageUrl = `https://media.discordapp.net/${imageUrl.slice(3)}`;
-                    console.log('Media proxy URL:', imageUrl);
-                } else if (imageUrl.startsWith('https://') || imageUrl.startsWith('http://')) {
-                    console.log('Using direct URL:', imageUrl);
-                } else if (activity.application_id) {
-                    const formats = [
-                        `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.png`,
-                        `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.jpg`,
-                        `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.webp`,
-                        `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}`,
-                        `https://cdn.discordapp.com/app-icons/${activity.application_id}/${imageUrl}.png`,
-                        `https://cdn.discordapp.com/avatars/${activity.application_id}/${imageUrl}.png`
-                    ];
-                    
-                    imageUrl = formats[0];
-                    console.log('Discord asset URL (trying):', imageUrl);
-                    console.log('All possible formats:', formats);
-                } else {
-                    console.log('No application_id found, using fallback');
-                    imageUrl = "https://cdn3.emoji.gg/emojis/8869-rocket.png";
+                } else if (!imageUrl.startsWith('http')) {
+                    imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.png`;
                 }
-                
-                console.log('Final large image URL:', imageUrl);
-                
-                imageHtml = `<img src="${imageUrl}" alt="${activity.name}" class="large-image" 
-                    onerror="
-                        console.log('Large image failed to load:', this.src);
-                        if (this.src.includes('.png')) {
-                            console.log('Trying .jpg format...');
-                            this.src = this.src.replace('.png', '.jpg');
-                        } else if (this.src.includes('.jpg')) {
-                            console.log('Trying .webp format...');
-                            this.src = this.src.replace('.jpg', '.webp');
-                        } else if (this.src.includes('.webp')) {
-                            console.log('Trying without extension...');
-                            this.src = this.src.replace('.webp', '');
-                        } else if (this.src.includes('app-assets')) {
-                            console.log('Trying app-icons instead...');
-                            this.src = this.src.replace('app-assets', 'app-icons');
-                        } else {
-                            console.log('All formats failed, using fallback rocket');
-                            this.src = 'https://cdn3.emoji.gg/emojis/8869-rocket.png';
-                        }
-                    ">`;
+                imageHtml = `<img src="${imageUrl}" alt="${activity.name}" class="large-image">`;
             } else {
-                console.log('No large image asset found, using rocket fallback');
+                // Use rocket image for activities without logos
                 imageHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="${activity.name}" class="large-image">`;
             }
             
-            // Get small icon - ENHANCED DEBUG VERSION
+            // Get small icon
             let iconHtml = '';
             if (activity.assets && activity.assets.small_image) {
                 let iconUrl = activity.assets.small_image;
-                console.log('Original small image URL:', iconUrl);
-                
-                if (iconUrl.startsWith('spotify:')) {
-                    iconUrl = `https://i.scdn.co/image/${iconUrl.slice(8)}`;
-                } else if (iconUrl.startsWith('mp:')) {
+                if (iconUrl.startsWith('mp:')) {
                     iconUrl = `https://media.discordapp.net/${iconUrl.slice(3)}`;
-                } else if (iconUrl.startsWith('https://') || iconUrl.startsWith('http://')) {
-                    console.log('Using direct small icon URL:', iconUrl);
-                } else if (activity.application_id) {
+                } else if (!iconUrl.startsWith('http')) {
                     iconUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${iconUrl}.png`;
-                    console.log('Discord small icon URL:', iconUrl);
-                } else {
-                    iconUrl = "https://cdn3.emoji.gg/emojis/8869-rocket.png";
                 }
-                
-                console.log('Final small icon URL:', iconUrl);
-                
-                iconHtml = `<img src="${iconUrl}" alt="" class="activity-icon" 
-                    onerror="
-                        console.log('Small icon failed to load:', this.src);
-                        if (this.src.includes('.png')) {
-                            this.src = this.src.replace('.png', '.jpg');
-                        } else if (this.src.includes('.jpg')) {
-                            this.src = this.src.replace('.jpg', '.webp');
-                        } else if (this.src.includes('.webp')) {
-                            this.src = this.src.replace('.webp', '');
-                        } else if (this.src.includes('app-assets')) {
-                            this.src = this.src.replace('app-assets', 'app-icons');
-                        } else {
-                            this.src = 'https://cdn3.emoji.gg/emojis/8869-rocket.png';
-                        }
-                    ">`;
+                iconHtml = `<img src="${iconUrl}" alt="" class="activity-icon">`;
             } else {
-                console.log('No small image asset found, using rocket fallback');
+                // Use rocket image for activities without icons
                 iconHtml = `<img src="https://cdn3.emoji.gg/emojis/8869-rocket.png" alt="" class="activity-icon">`;
             }
             
@@ -930,6 +850,7 @@
                 const elapsed = now - activity.timestamps.start;
                 playtimeHtml = `<div class="playtime">Time: ${formatTime(elapsed)}</div>`;
                 
+                // Update playtime in real-time
                 setInterval(() => {
                     const newNow = Date.now();
                     const newElapsed = newNow - activity.timestamps.start;
@@ -960,6 +881,7 @@
                     </div>
                 `;
                 
+                // Update progress in real-time
                 if (progressInterval) clearInterval(progressInterval);
                 progressInterval = setInterval(() => {
                     const newNow = Date.now();
@@ -1006,7 +928,6 @@
             
             return tile;
         }
-
 
         function formatTime(ms) {
             const totalSeconds = Math.floor(ms / 1000);
