@@ -215,7 +215,7 @@
                 font-size: 2rem;
             }
             
-                .features {
+            .features {
                 grid-template-columns: 1fr;
             }
         }
@@ -230,13 +230,37 @@
 
         <form id="suggestionForm">
             <div class="form-group">
+                <label for="name">👤 Your Name (Optional)</label>
+                <input type="text" id="name" name="name" placeholder="Your name">
+            </div>
+
+            <div class="form-group">
                 <label for="email">📧 Your Email</label>
                 <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
             </div>
 
             <div class="form-group">
-                <label for="description">💡 Video Suggestion</label>
-                <textarea id="description" name="description" placeholder="Describe your video idea in detail. What would you like to see? What topics should I cover? Be as specific as possible!" required></textarea>
+                <label for="category">📂 Video Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Tutorial">Tutorial</option>
+                    <option value="Review">Review</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Educational">Educational</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Tech">Tech</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="suggestion">💡 Video Suggestion</label>
+                <textarea id="suggestion" name="suggestion" placeholder="Describe your video idea in detail. What would you like to see? What topics should I cover? Be as specific as possible!" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="why">🤔 Why this video? (Optional)</label>
+                <textarea id="why" name="why" placeholder="Tell me why you think this video would be valuable. What problem would it solve or what entertainment would it provide?"></textarea>
             </div>
 
             <button type="submit" class="submit-btn" id="submitBtn">
@@ -273,30 +297,35 @@
         const loadingDiv = document.querySelector('.loading');
         const messageContainer = document.getElementById('messageContainer');
 
-        // API Configuration - Fixed the newline issue
-        const API_KEY = 'P5Vxkm9j4jjSHFuI84cBKA0569sbKEfj';
+        // SECURITY WARNING: API key should be stored on server-side, not client-side
+        // This violates security best practices according to the API documentation
+        const API_KEY = 'P5Vxkm9j4jjSHFuI84cBKA0569sbKEfj'; // Replace with your actual API key
         const API_URL = `https://dms-api.mcboss.top/api/${API_KEY}/send`;
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Get form data - matching the actual form fields
+            // Get form data - now correctly matching the HTML form fields
             const formData = new FormData(form);
             const email = formData.get('email');
-            const description = formData.get('description');
+            const name = formData.get('name') || 'Anonymous';
+            const category = formData.get('category');
+            const suggestion = formData.get('suggestion');
+            const why = formData.get('why') || 'No additional details provided';
 
-            // Create formatted message for Discord
+            // Create formatted message
             const message = `🎥 NEW VIDEO SUGGESTION
 
-📧 **From:** ${email}
+👤 **From:** ${name} (${email})
+📂 **Category:** ${category}
 
-💡 **Video Idea:**
-${description}
+💡 **Suggestion:**
+${suggestion}
 
-⏰ **Submitted:** ${new Date().toLocaleString()}
+🤔 **Why this video:**
+${why}
 
----
-Sent from Video Suggestions Form`;
+⏰ **Submitted:** ${new Date().toLocaleString()}`;
 
             // Show loading state
             submitBtn.disabled = true;
