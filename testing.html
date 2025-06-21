@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Support Panel</title>
+  <style>
+    body {
+      background: #121212;
+      font-family: Arial, sans-serif;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .panel {
+      background: #1e1e1e;
+      border: 2px solid #00ff99;
+      padding: 2em;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 20px #00ff9960;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 0.8em;
+      margin: 0.5em 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    input, textarea {
+      background: #2e2e2e;
+      color: #f5f5f5;
+    }
+
+    button {
+      background: #00ff99;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .char-count {
+      font-size: 0.8em;
+      text-align: right;
+      margin-top: -0.5em;
+      margin-bottom: 0.5em;
+      color: #aaa;
+    }
+
+    .status {
+      margin-top: 1em;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="panel">
+    <h2>📩 Customer Support</h2>
+    <input type="email" id="email" placeholder="Your Email" required />
+    <textarea id="message" placeholder="Your Message..." rows="8" maxlength="2000"></textarea>
+    <div class="char-count"><span id="charCount">0</span>/2000</div>
+    <button onclick="sendMessage()">Send</button>
+    <div id="status" class="status"></div>
+  </div>
+
+  <script>
+    const API_KEY = "testing-customer-service-key";
+    const API_URL = "https://discord-message-sender-api.vercel.app/api";
+
+    const messageInput = document.getElementById("message");
+    const charCount = document.getElementById("charCount");
+
+    messageInput.addEventListener("input", () => {
+      charCount.textContent = messageInput.value.length;
+    });
+
+    function sendMessage() {
+      const email = document.getElementById("email").value.trim();
+      let message = messageInput.value.trim();
+
+      if (!email || !message) {
+        showStatus("❌ Please fill in both fields.", "red");
+        return;
+      }
+
+      if (message.length > 2000) {
+        showStatus("❌ Message too long (2000 characters max).", "red");
+        return;
+      }
+
+      // Replace newlines with `\` for your API
+      const formatted = encodeURIComponent(message.replace(/\n/g, "\\"));
+
+      const endpoint = `${API_URL}/${API_KEY}/email-${encodeURIComponent(email)}/message-${formatted}`;
+
+      fetch(endpoint)
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === "success") {
+            showStatus("✅ Message sent successfully!", "lime");
+            messageInput.value = "";
+            charCount.textContent = "0";
+          } else {
+            showStatus("❌ " + (data.error || "Unknown error"), "red");
+          }
+        })
+        .catch(() => {
+          showStatus("❌ Failed to send message.", "red");
+        });
+    }
+
+    function showStatus(msg, color) {
+      const status = document.getElementById("status");
+      status.textContent = msg;
+      status.style.color = color;
+    }
+  </script>
+
+</body>
+</html>
